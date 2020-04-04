@@ -14,10 +14,11 @@ const config = {
   version: process.env.VERSION,
   scene: [Boot, Main],
   physics: {
-    default: 'arcade',
-    arcade: {
-      gravity: { y: 300 },
+    default: 'matter',
+    matter: {
+      gravity: { y: 0.9 },
       debug: process.env.NODE_ENV === 'development',
+      enableSleeping: true
     },
   },
   disableContextMenu: true,

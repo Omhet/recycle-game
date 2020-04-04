@@ -17,7 +17,7 @@
   "rules": {
     "no-cond-assign": "error",
     "no-unused-vars": ["error", { "vars": "all", "args": "none" }],
-    "prettier/prettier": "error",
-    "sort-imports": "error"
+    "prettier/prettier": "off",
+    "sort-imports": "off"
   }
 }
