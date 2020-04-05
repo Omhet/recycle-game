@@ -1,1 +1,1 @@
-export { default as Player } from './Player';
+export { default as Ball } from './Ball';

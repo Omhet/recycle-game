@@ -1,5 +1,7 @@
-import { SCENES, OBJECTS, FONTS } from '../constants';
+import { SCENES } from '../constants';
 import { Scene } from 'phaser';
+import { Ball } from '../sprites';
+import { isIntersecting } from '../utils/misc';
 
 export default class Main extends Scene {
   constructor() {
@@ -7,19 +9,11 @@ export default class Main extends Scene {
   }
 
   create() {
-    this.matter.world.setBounds(0, 0, this.game.config.width, this.game.config.height);
+    const { width, height } = this.game.config;
 
-    const size = 110;
-    this.ball = this.matter.add.sprite(
-      this.game.config.width / 2,
-      this.game.config.height,
-      OBJECTS.BALL
-    );
-    this.ball
-      .setSize(size, size)
-      .setDisplaySize(size, size)
-      .setBounce(0.95)
-      .setVelocityY(-20);
+    this.matter.world.setBounds(0, 0, width, height);
+
+    this.ball = new Ball({ scene: this, x: width / 2, y: height });
 
     const swipe = this.gestures.add.swipe({
       threshold: 1,
@@ -27,8 +21,6 @@ export default class Main extends Scene {
       direction: '8dir',
     });
     swipe.on('swipe', this.handleSwipe, this);
-
-    this.debugText = this.add.bitmapText(50, 50, FONTS.MAIN, "DEBUG");
   }
 
   handleSwipe({ x, y, left, right, up, down }) {
@@ -40,13 +32,4 @@ export default class Main extends Scene {
     }
   }
 
-}
-
-function isIntersecting(obj, { x, y }) {
-  const { left, right, top, bottom } = obj.getBounds();
-  const padding = 20;
-  return x >= left - padding &&
-    x <= right + padding &&
-    y >= top - padding &&
-    y <= bottom + padding;
 }
