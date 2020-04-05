@@ -24,10 +24,11 @@ export default class Main extends Scene {
   }
 
   handleSwipe({ x, y, left, right, up, down }) {
-    const vel = 20;
+    const velXNom = 10;
+    const velYNom = 20;
     if (isIntersecting(this.ball, { x, y })) {
-      let velX = left ? -vel : right ? vel : 0;
-      let velY = up ? -vel : down ? vel : 0;
+      let velX = left ? -velXNom : right ? velXNom : 0;
+      let velY = up ? -velYNom : down ? velYNom : 0;
       this.ball.setVelocity(velX, velY);
     }
   }
