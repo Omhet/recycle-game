@@ -44,5 +44,9 @@ export default class Main extends Scene {
 
 function isIntersecting(obj, { x, y }) {
   const { left, right, top, bottom } = obj.getBounds();
-  return x >= left && x <= right && y >= top && y <= bottom;
+  const padding = 20;
+  return x >= left - padding &&
+    x <= right + padding &&
+    y >= top - padding &&
+    y <= bottom + padding;
 }
