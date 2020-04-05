@@ -13,6 +13,18 @@ export default class Ball extends Physics.Matter.Sprite {
       .setDisplaySize(size, size)
       .setBounce(0.95)
       .setVisible(false);
+    
+    this.size = size;
+  }
+
+  hide() {
+    const { width, height } = this.scene.game.config;
+    const { size } = this;
+    const x = Math.Between(size, width - size);
+    const y = height - size;
+
+    this.setVelocity(0, 0).setVisible(false).setPosition(x, y);
+
   }
 
   throw() {

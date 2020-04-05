@@ -37,8 +37,8 @@ export default class Main extends Scene {
     });
   }
 
-  handleBallCollideWalls() {
-    console.log('wall');
+  handleBallCollideWalls({ gameObjectA: ball }) {
+    ball.hide();
   }
 
   startBallTimer() {
