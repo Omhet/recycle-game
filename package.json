@@ -84,5 +84,8 @@
     "npm": ">=5.3"
   },
   "private": true,
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "phaser3-rex-plugins": "^1.1.11"
+  }
 }
