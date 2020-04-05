@@ -2,8 +2,8 @@ import { Physics } from 'phaser';
 import { OBJECTS } from '../constants';
 
 export default class Ball extends Physics.Matter.Sprite {
-  constructor({ scene, x, y }) {
-    super(scene.matter.world, x, y, OBJECTS.BALL);
+  constructor({ scene, x }) {
+    super(scene.matter.world, x, scene.game.config.height, OBJECTS.BALL);
     scene.add.existing(this);
     const size = 110;
     this

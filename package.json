@@ -86,6 +86,7 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
+    "phaser-matter-collision-plugin": "^0.10.2",
     "phaser3-rex-plugins": "^1.1.11"
   }
 }

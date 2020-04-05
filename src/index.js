@@ -2,6 +2,7 @@ import './index.css';
 import { Boot, Main } from './scenes';
 import Phaser from 'phaser';
 import GesturesPlugin from 'phaser3-rex-plugins/plugins/gestures-plugin.js'
+import PhaserMatterCollisionPlugin from 'phaser-matter-collision-plugin';
 // import * as serviceWorker from './serviceWorker';
 
 /**
@@ -27,6 +28,11 @@ const config = {
       key: 'gestures',
       plugin: GesturesPlugin,
       mapping: 'gestures'
+    },
+    {
+      plugin: PhaserMatterCollisionPlugin, 
+      key: "matterCollision", 
+      mapping: "matterCollision" 
     }
     ]
   },
