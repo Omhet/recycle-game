@@ -45,12 +45,13 @@ const config = {
   },
 };
 
-let gameOptions = {
+export let gameOptions = {
   defaultSize: {
     width: 750,
     height: 1334,
     maxRatio: 4 / 3,
   },
+  ballSize: 110
 };
 
 window.onload = function() {

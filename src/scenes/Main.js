@@ -2,6 +2,7 @@ import { SCENES } from '../constants';
 import { Scene } from 'phaser';
 import { Ball } from '../sprites';
 import { isIntersecting } from '../utils/misc';
+import { gameOptions } from '../index';
 
 export default class Main extends Scene {
   constructor() {
@@ -25,9 +26,12 @@ export default class Main extends Scene {
   }
 
   addBalls() {
+    const { width } = this.game.config;
+    const cells = Math.floor(width / gameOptions.ballSize);
     this.ballsInAir = [];
-    this.balls = new Array(4).fill(null).map(() => {
-      return new Ball({ scene: this });
+
+    this.balls = new Array(cells).fill(null).map((el, i) => {
+      return new Ball({ scene: this, cell: i });
     });
 
     this.matterCollision.addOnCollideStart({

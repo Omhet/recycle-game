@@ -1,11 +1,12 @@
-import { Physics, Math } from 'phaser';
+import { Physics } from 'phaser';
 import { OBJECTS } from '../constants';
+import { gameOptions } from '../index';
 
 export default class Ball extends Physics.Matter.Sprite {
-  constructor({ scene }) {
-    const { width, height } = scene.game.config;
-    const size = 110;
-    const x = Math.Between(size, width - size);
+  constructor({ scene, cell }) {
+    const { height } = scene.game.config;
+    const { ballSize: size } = gameOptions;
+    const x = cell * size;
     const y = height - size;
     super(scene.matter.world, x, y, OBJECTS.BALL);
     scene.add.existing(this);
@@ -13,18 +14,15 @@ export default class Ball extends Physics.Matter.Sprite {
       .setDisplaySize(size, size)
       .setBounce(0.95)
       .setVisible(false);
-    
+
     this.size = size;
+    this.initX = x;
+    this.initY = y;
   }
 
   hide() {
-    const { width, height } = this.scene.game.config;
-    const { size } = this;
-    const x = Math.Between(size, width - size);
-    const y = height - size;
-
-    this.setVelocity(0, 0).setVisible(false).setPosition(x, y);
-
+    console.log(this)
+    this.setVelocity(0, 0).setVisible(false).setPosition(this.initX, this.initY);
   }
 
   throw() {
