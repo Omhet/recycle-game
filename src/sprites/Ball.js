@@ -20,9 +20,9 @@ export default class Ball extends Physics.Matter.Sprite {
     this.initY = y;
   }
 
-  hide() {
-    console.log(this)
-    this.setVelocity(0, 0).setVisible(false).setPosition(this.initX, this.initY);
+  die() {
+    this.destroy();
+    delete this;
   }
 
   throw() {

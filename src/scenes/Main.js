@@ -1,5 +1,5 @@
 import { SCENES } from '../constants';
-import { Scene } from 'phaser';
+import Phaser, { Scene } from 'phaser';
 import { Ball } from '../sprites';
 import { isIntersecting } from '../utils/misc';
 import { gameOptions } from '../index';
@@ -14,7 +14,9 @@ export default class Main extends Scene {
 
     this.worldBounds = this.matter.world.setBounds(0, 0, width, height);
 
-    this.addBalls();
+    this.cellsNum = Math.floor(width / gameOptions.ballSize);
+    this.balls = [];
+
     this.startBallTimer();
 
     const swipe = this.gestures.add.swipe({
@@ -25,24 +27,10 @@ export default class Main extends Scene {
     swipe.on('swipe', this.handleSwipe, this);
   }
 
-  addBalls() {
-    const { width } = this.game.config;
-    const cells = Math.floor(width / gameOptions.ballSize);
-    this.ballsInAir = [];
-
-    this.balls = new Array(cells).fill(null).map((el, i) => {
-      return new Ball({ scene: this, cell: i });
-    });
-
-    this.matterCollision.addOnCollideStart({
-      objectA: this.balls,
-      objectB: [this.worldBounds.walls.left, this.worldBounds.walls.right],
-      callback: this.handleBallCollideWalls,
-    });
-  }
-
   handleBallCollideWalls({ gameObjectA: ball }) {
-    ball.hide();
+    const ballIndex = this.balls.findIndex(el => el === ball);
+    this.balls.splice(ballIndex, 1);
+    ball.die();
   }
 
   startBallTimer() {
@@ -55,9 +43,18 @@ export default class Main extends Scene {
   }
 
   throwBall() {
-    if (this.balls.length > 0) {
-      const ball = this.balls.pop();
-      this.ballsInAir.push(ball);
+    if (this.balls.length < 1) {
+      const cell = Phaser.Math.Between(0, this.cellsNum);
+      const ball = new Ball({ scene: this, cell });
+
+      this.matterCollision.addOnCollideStart({
+        objectA: ball,
+        objectB: [this.worldBounds.walls.left, this.worldBounds.walls.right, this.worldBounds.walls.bottom],
+        callback: this.handleBallCollideWalls,
+        context: this
+      });
+
+      this.balls.push(ball);
       ball.throw();
     }
   }
@@ -65,7 +62,7 @@ export default class Main extends Scene {
   handleSwipe({ x, y, left, right, up, down }) {
     const velXNom = 10;
     const velYNom = 20;
-    this.ballsInAir.forEach(ball => {
+    this.balls.forEach(ball => {
       if (isIntersecting(ball, { x, y })) {
         let velX = left ? -velXNom : right ? velXNom : 0;
         let velY = up ? -velYNom : down ? velYNom : 0;
