@@ -1,7 +1,7 @@
 import './index.css';
 import { Boot, Main } from './scenes';
 import Phaser from 'phaser';
-import GesturesPlugin from 'phaser3-rex-plugins/plugins/gestures-plugin.js'
+import GesturesPlugin from 'phaser3-rex-plugins/plugins/gestures-plugin.js';
 import PhaserMatterCollisionPlugin from 'phaser-matter-collision-plugin';
 // import * as serviceWorker from './serviceWorker';
 
@@ -20,21 +20,22 @@ const config = {
     matter: {
       gravity: { y: 0.9 },
       debug: process.env.NODE_ENV === 'development',
-      enableSleeping: true
+      enableSleeping: true,
     },
   },
   plugins: {
-    scene: [{
-      key: 'gestures',
-      plugin: GesturesPlugin,
-      mapping: 'gestures'
-    },
-    {
-      plugin: PhaserMatterCollisionPlugin, 
-      key: "matterCollision", 
-      mapping: "matterCollision" 
-    }
-    ]
+    scene: [
+      {
+        key: 'gestures',
+        plugin: GesturesPlugin,
+        mapping: 'gestures',
+      },
+      {
+        plugin: PhaserMatterCollisionPlugin,
+        key: 'matterCollision',
+        mapping: 'matterCollision',
+      },
+    ],
   },
   disableContextMenu: true,
   backgroundColor: '#444',
@@ -52,7 +53,7 @@ let gameOptions = {
   },
 };
 
-window.onload = function () {
+window.onload = function() {
   let width = gameOptions.defaultSize.width;
   let height = gameOptions.defaultSize.height;
   let perfectRatio = width / height;

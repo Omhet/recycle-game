@@ -18,7 +18,7 @@ export default class Main extends Scene {
     this.matterCollision.addOnCollideStart({
       objectA: this.ball,
       objectB: [worldBounds.walls.left, worldBounds.walls.right],
-      callback: this.handleBallCollideWalls
+      callback: this.handleBallCollideWalls,
     });
 
     const swipe = this.gestures.add.swipe({
@@ -30,7 +30,7 @@ export default class Main extends Scene {
   }
 
   handleBallCollideWalls() {
-    console.log('wall')
+    console.log('wall');
   }
 
   handleSwipe({ x, y, left, right, up, down }) {
@@ -42,5 +42,4 @@ export default class Main extends Scene {
       this.ball.setVelocity(velX, velY);
     }
   }
-
 }

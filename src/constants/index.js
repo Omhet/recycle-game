@@ -8,7 +8,7 @@ export const OBJECTS = {
 };
 
 export const FONTS = {
-  MAIN: 'MAIN'
+  MAIN: 'MAIN',
 };
 
 export default {

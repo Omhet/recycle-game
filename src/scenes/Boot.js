@@ -9,7 +9,11 @@ export default class Boot extends Scene {
   preload() {
     const { load } = this;
     load.image(OBJECTS.BALL, require('../assets/sprites/ball.png'));
-    load.bitmapFont(FONTS.MAIN, require('../assets/fonts/font.png'), require('../assets/fonts/font.fnt'));
+    load.bitmapFont(
+      FONTS.MAIN,
+      require('../assets/fonts/font.png'),
+      require('../assets/fonts/font.fnt')
+    );
   }
 
   create() {
