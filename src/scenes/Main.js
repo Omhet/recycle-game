@@ -25,6 +25,7 @@ export default class Main extends Scene {
   }
 
   addBalls() {
+    this.ballsInAir = [];
     this.balls = new Array(4).fill(null).map(() => {
       return new Ball({ scene: this });
     });
@@ -52,6 +53,7 @@ export default class Main extends Scene {
   throwBall() {
     if (this.balls.length > 0) {
       const ball = this.balls.pop();
+      this.ballsInAir.push(ball);
       ball.throw();
     }
   }
@@ -59,10 +61,12 @@ export default class Main extends Scene {
   handleSwipe({ x, y, left, right, up, down }) {
     const velXNom = 10;
     const velYNom = 20;
-    if (isIntersecting(this.ball, { x, y })) {
-      let velX = left ? -velXNom : right ? velXNom : 0;
-      let velY = up ? -velYNom : down ? velYNom : 0;
-      this.ball.setVelocity(velX, velY);
-    }
+    this.ballsInAir.forEach(ball => {
+      if (isIntersecting(ball, { x, y })) {
+        let velX = left ? -velXNom : right ? velXNom : 0;
+        let velY = up ? -velYNom : down ? velYNom : 0;
+        ball.setVelocity(velX, velY);
+      }
+    })
   }
 }
