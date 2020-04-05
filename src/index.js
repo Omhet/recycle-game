@@ -20,7 +20,7 @@ const config = {
     matter: {
       gravity: { y: 0.9 },
       debug: process.env.NODE_ENV === 'development',
-      enableSleeping: true,
+      enableSleeping: false,
     },
   },
   plugins: {

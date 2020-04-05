@@ -14,6 +14,7 @@ export default class Main extends Scene {
     this.worldBounds = this.matter.world.setBounds(0, 0, width, height);
 
     this.addBalls();
+    this.startBallTimer();
 
     const swipe = this.gestures.add.swipe({
       threshold: 1,
@@ -23,11 +24,9 @@ export default class Main extends Scene {
     swipe.on('swipe', this.handleSwipe, this);
   }
 
-  addBalls() {    
-    this.balls = new Array(2).fill(null).map(() => {
-      const ball = new Ball({ scene: this });
-      ball.setVisible(false);
-      return ball;
+  addBalls() {
+    this.balls = new Array(4).fill(null).map(() => {
+      return new Ball({ scene: this });
     });
 
     this.matterCollision.addOnCollideStart({
@@ -39,6 +38,22 @@ export default class Main extends Scene {
 
   handleBallCollideWalls() {
     console.log('wall');
+  }
+
+  startBallTimer() {
+    this.ballTimer = this.time.addEvent({
+      delay: 1000,
+      callback: this.throwBall,
+      callbackScope: this,
+      loop: true,
+    });
+  }
+
+  throwBall() {
+    if (this.balls.length > 0) {
+      const ball = this.balls.pop();
+      ball.throw();
+    }
   }
 
   handleSwipe({ x, y, left, right, up, down }) {

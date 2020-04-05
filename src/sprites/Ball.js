@@ -11,6 +11,11 @@ export default class Ball extends Physics.Matter.Sprite {
     scene.add.existing(this);
     this.setSize(size, size)
       .setDisplaySize(size, size)
-      .setBounce(0.95);
+      .setBounce(0.95)
+      .setVisible(false);
+  }
+
+  throw() {
+    this.setVisible(true).setVelocityY(-30);
   }
 }
