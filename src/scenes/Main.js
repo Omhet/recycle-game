@@ -42,6 +42,7 @@ export default class Main extends Scene {
   handleWasteCollideBin({ gameObjectA: waste }) {
     if (waste.body.velocity.y > 0) {
       this.diposeWaste(waste);
+      this.bin.checkType(waste.type);
     }
   }
 

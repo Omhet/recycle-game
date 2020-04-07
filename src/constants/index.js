@@ -14,7 +14,6 @@ export const objects = {
 };
 
 export const wasteType = {
-  general: 'general',
   plastic: 'plastic',
 };
 

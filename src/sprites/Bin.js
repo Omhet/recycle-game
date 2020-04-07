@@ -1,5 +1,5 @@
-import { Physics } from 'phaser';
-import { objects } from '../constants';
+import Phaser, { Physics } from 'phaser';
+import { objects, wasteType } from '../constants';
 
 export default class Bin extends Physics.Matter.Sprite {
   constructor({ scene }) {
@@ -14,5 +14,11 @@ export default class Bin extends Physics.Matter.Sprite {
     this.setDisplaySize(size * 0.75, 10)
       .setSensor(true)
       .setStatic(true);
+
+    this.type = Phaser.Math.RND.pick(Object.values(wasteType));
+  }
+
+  checkType(type) {
+    return this.type === type;
   }
 }
