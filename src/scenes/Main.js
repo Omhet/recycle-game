@@ -89,7 +89,7 @@ export default class Main extends Scene {
     const velXNom = 10;
     const velYNom = 20;
     this.balls.forEach(ball => {
-      if (isIntersecting(ball, { x, y })) {
+      if (isIntersecting(ball, { x, y }, 50)) {
         let velX = left ? -velXNom : right ? velXNom : 0;
         let velY = up ? -velYNom : down ? velYNom : 0;
         ball.setVelocity(velX, velY);

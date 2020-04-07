@@ -1,6 +1,5 @@
-export function isIntersecting(obj, { x, y }) {
+export function isIntersecting(obj, { x, y }, padding) {
   const { left, right, top, bottom } = obj.getBounds();
-  const padding = 20;
   return (
     x >= left - padding &&
     x <= right + padding &&
