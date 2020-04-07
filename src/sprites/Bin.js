@@ -1,5 +1,5 @@
 import { Physics } from 'phaser';
-import { OBJECTS } from '../constants';
+import { objects } from '../constants';
 
 export default class Bin extends Physics.Matter.Sprite {
   constructor({ scene }) {
@@ -8,7 +8,7 @@ export default class Bin extends Physics.Matter.Sprite {
 
     super(scene.matter.world, width / 2, height - size * 0.75);
 
-    const bin = scene.add.image(width / 2, height - size / 2, OBJECTS.BIN);
+    const bin = scene.add.image(width / 2, height - size / 2, objects.bin);
     bin.setDisplaySize(size, size);
 
     this.setDisplaySize(size * 0.75, 10)

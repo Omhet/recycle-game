@@ -1,24 +1,24 @@
-export const SCENES = {
-  BOOT: 'BOOT',
-  MAIN: 'MAIN',
+export const scenes = {
+  boot: 'boot',
+  main: 'main',
 };
 
-export const OBJECTS = {
+export const objects = {
   waste: {
     general: 'general',
     plastic: {
       bottle: 'bottle',
     },
   },
-  BIN: 'BIN',
+  bin: 'bin',
 };
 
-export const FONTS = {
-  MAIN: 'MAIN',
+export const fonts = {
+  main: 'main',
 };
 
 export default {
-  SCENES,
-  OBJECTS,
-  FONTS,
+  scenes,
+  objects,
+  fonts,
 };

@@ -1,11 +1,11 @@
-import { SCENES } from '../constants';
+import { scenes } from '../constants';
 import { Scene } from 'phaser';
 import { Waste, Bin } from '../sprites';
 import { isIntersecting } from '../utils/misc';
 
 export default class Main extends Scene {
   constructor() {
-    super({ key: SCENES.MAIN });
+    super({ key: scenes.main });
   }
 
   create() {
