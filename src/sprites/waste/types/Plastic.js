@@ -1,5 +1,5 @@
-import { objects } from '../../constants';
-import Waste from './Waste';
+import { objects } from '../../../constants';
+import Waste from '../Waste';
 
 export default class Plastic extends Waste {
   constructor({ scene }) {
