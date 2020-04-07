@@ -1,6 +1,6 @@
-import { SCENES, OBJECTS } from '../constants';
+import { SCENES } from '../constants';
 import Phaser, { Scene } from 'phaser';
-import { Ball } from '../sprites';
+import { Ball, Bin } from '../sprites';
 import { isIntersecting } from '../utils/misc';
 import { gameOptions } from '../index';
 
@@ -20,15 +20,7 @@ export default class Main extends Scene {
     this.startBallTimer();
 
     // Bin
-    const size = 400;
-    const bin = this.add.image(width / 2, height - size / 2, OBJECTS.BIN);
-    bin.setDisplaySize(size, size);
-
-    this.binCollider = this.matter.add.sprite(width / 2, height - size * 0.75);
-    this.binCollider.setDisplaySize(size * 0.75, 10)
-      .setSensor(true)
-      .setStatic(true);
-
+    this.bin = new Bin({ scene: this });
 
     const swipe = this.gestures.add.swipe({
       threshold: 1,
@@ -70,15 +62,19 @@ export default class Main extends Scene {
 
       this.matterCollision.addOnCollideStart({
         objectA: ball,
-        objectB: [this.worldBounds.walls.left, this.worldBounds.walls.right, this.worldBounds.walls.bottom],
+        objectB: [
+          this.worldBounds.walls.left,
+          this.worldBounds.walls.right,
+          this.worldBounds.walls.bottom,
+        ],
         callback: this.handleBallCollideWalls,
-        context: this
+        context: this,
       });
       this.matterCollision.addOnCollideStart({
         objectA: ball,
-        objectB: [this.binCollider],
+        objectB: [this.bin],
         callback: this.handleBallCollideBin,
-        context: this
+        context: this,
       });
 
       this.balls.push(ball);
@@ -95,6 +91,6 @@ export default class Main extends Scene {
         let velY = up ? -velYNom : down ? velYNom : 0;
         ball.setVelocity(velX, velY);
       }
-    })
+    });
   }
 }

@@ -51,7 +51,7 @@ export let gameOptions = {
     height: 1334,
     maxRatio: 4 / 3,
   },
-  ballSize: 110
+  ballSize: 110,
 };
 
 window.onload = function() {
