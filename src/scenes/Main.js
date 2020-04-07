@@ -1,8 +1,7 @@
 import { SCENES } from '../constants';
-import Phaser, { Scene } from 'phaser';
+import { Scene } from 'phaser';
 import { Ball, Bin } from '../sprites';
 import { isIntersecting } from '../utils/misc';
-import { gameOptions } from '../index';
 
 export default class Main extends Scene {
   constructor() {
@@ -12,10 +11,15 @@ export default class Main extends Scene {
   create() {
     const { width, height } = this.game.config;
 
-    this.worldBounds = this.matter.world.setBounds(0, 0, width, height);
+    const wallOffset = 200;
+    this.worldBounds = this.matter.world.setBounds(
+      -wallOffset,
+      0,
+      width + wallOffset * 2,
+      height + wallOffset
+    );
 
     // Balls
-    this.cellsNum = Math.floor(width / gameOptions.ballSize);
     this.balls = [];
     this.startBallTimer();
 
@@ -57,8 +61,7 @@ export default class Main extends Scene {
 
   throwBall() {
     if (this.balls.length < 1) {
-      const cell = Phaser.Math.Between(0, this.cellsNum);
-      const ball = new Ball({ scene: this, cell });
+      const ball = new Ball({ scene: this });
 
       this.matterCollision.addOnCollideStart({
         objectA: ball,
