@@ -4,7 +4,12 @@ export const SCENES = {
 };
 
 export const OBJECTS = {
-  BALL: 'BALL',
+  waste: {
+    general: 'general',
+    plastic: {
+      bottle: 'bottle',
+    },
+  },
   BIN: 'BIN',
 };
 
