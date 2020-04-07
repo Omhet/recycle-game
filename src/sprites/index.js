@@ -1,2 +1,2 @@
-export { default as Waste } from './Waste';
+export { default as WasteFactory } from './waste/WasteFactory';
 export { default as Bin } from './Bin';

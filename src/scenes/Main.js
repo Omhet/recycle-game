@@ -1,6 +1,6 @@
 import { scenes } from '../constants';
 import { Scene } from 'phaser';
-import { Waste, Bin } from '../sprites';
+import { WasteFactory, Bin } from '../sprites';
 import { isIntersecting } from '../utils/misc';
 
 export default class Main extends Scene {
@@ -20,6 +20,7 @@ export default class Main extends Scene {
     );
 
     // Waste
+    this.wasteFactory = new WasteFactory({ scene: this });
     this.wastes = [];
     this.startWasteTimer();
 
@@ -61,7 +62,7 @@ export default class Main extends Scene {
 
   throwWaste() {
     if (this.wastes.length < 1) {
-      const waste = new Waste({ scene: this });
+      const waste = this.wasteFactory.getRandomWaste();
 
       this.matterCollision.addOnCollideStart({
         objectA: waste,
