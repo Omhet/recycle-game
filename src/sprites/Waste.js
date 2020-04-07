@@ -2,7 +2,7 @@ import Phaser, { Physics } from 'phaser';
 import { OBJECTS } from '../constants';
 import { gameOptions } from '../index';
 
-export default class Ball extends Physics.Matter.Sprite {
+export default class Waste extends Physics.Matter.Sprite {
   constructor({ scene }) {
     const { width, height } = scene.game.config;
     const { ballSize: size } = gameOptions;
@@ -20,7 +20,7 @@ export default class Ball extends Physics.Matter.Sprite {
     this.initY = y;
   }
 
-  die() {
+  dispose() {
     this.destroy();
     delete this;
   }

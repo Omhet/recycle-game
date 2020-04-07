@@ -1,6 +1,6 @@
 import { SCENES } from '../constants';
 import { Scene } from 'phaser';
-import { Ball, Bin } from '../sprites';
+import { Waste, Bin } from '../sprites';
 import { isIntersecting } from '../utils/misc';
 
 export default class Main extends Scene {
@@ -19,9 +19,9 @@ export default class Main extends Scene {
       height + wallOffset
     );
 
-    // Balls
-    this.balls = [];
-    this.startBallTimer();
+    // Waste
+    this.wastes = [];
+    this.startWasteTimer();
 
     // Bin
     this.bin = new Bin({ scene: this });
@@ -34,65 +34,65 @@ export default class Main extends Scene {
     swipe.on('swipe', this.handleSwipe, this);
   }
 
-  handleBallCollideWalls({ gameObjectA: ball }) {
-    this.diposeBall(ball);
+  handleWasteCollideWalls({ gameObjectA: waste }) {
+    this.diposeWaste(waste);
   }
 
-  handleBallCollideBin({ gameObjectA: ball }) {
-    if (ball.body.velocity.y > 0) {
-      this.diposeBall(ball);
+  handleWasteCollideBin({ gameObjectA: waste }) {
+    if (waste.body.velocity.y > 0) {
+      this.diposeWaste(waste);
     }
   }
 
-  diposeBall(ball) {
-    const ballIndex = this.balls.findIndex(el => el === ball);
-    this.balls.splice(ballIndex, 1);
-    ball.die();
+  diposeWaste(waste) {
+    const wasteIndex = this.wastes.findIndex(el => el === waste);
+    this.wastes.splice(wasteIndex, 1);
+    waste.dispose();
   }
 
-  startBallTimer() {
-    this.ballTimer = this.time.addEvent({
+  startWasteTimer() {
+    this.wasteTimer = this.time.addEvent({
       delay: 1000,
-      callback: this.throwBall,
+      callback: this.throwWaste,
       callbackScope: this,
       loop: true,
     });
   }
 
-  throwBall() {
-    if (this.balls.length < 1) {
-      const ball = new Ball({ scene: this });
+  throwWaste() {
+    if (this.wastes.length < 1) {
+      const waste = new Waste({ scene: this });
 
       this.matterCollision.addOnCollideStart({
-        objectA: ball,
+        objectA: waste,
         objectB: [
           this.worldBounds.walls.left,
           this.worldBounds.walls.right,
           this.worldBounds.walls.bottom,
         ],
-        callback: this.handleBallCollideWalls,
+        callback: this.handleWasteCollideWalls,
         context: this,
       });
       this.matterCollision.addOnCollideStart({
-        objectA: ball,
+        objectA: waste,
         objectB: [this.bin],
-        callback: this.handleBallCollideBin,
+        callback: this.handleWasteCollideBin,
         context: this,
       });
 
-      this.balls.push(ball);
-      ball.throw();
+      this.wastes.push(waste);
+      waste.throw();
     }
   }
 
   handleSwipe({ x, y, left, right, up, down }) {
     const velXNom = 10;
     const velYNom = 20;
-    this.balls.forEach(ball => {
-      if (isIntersecting(ball, { x, y }, 50)) {
+    this.wastes.forEach(waste => {
+      if (isIntersecting(waste, { x, y }, 50)) {
         let velX = left ? -velXNom : right ? velXNom : 0;
         let velY = up ? -velYNom : down ? velYNom : 0;
-        ball.setVelocity(velX, velY);
+        waste.setVelocity(velX, velY);
       }
     });
   }
