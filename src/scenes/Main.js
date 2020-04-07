@@ -1,4 +1,4 @@
-import { SCENES } from '../constants';
+import { SCENES, OBJECTS } from '../constants';
 import Phaser, { Scene } from 'phaser';
 import { Ball } from '../sprites';
 import { isIntersecting } from '../utils/misc';
@@ -14,10 +14,21 @@ export default class Main extends Scene {
 
     this.worldBounds = this.matter.world.setBounds(0, 0, width, height);
 
+    // Balls
     this.cellsNum = Math.floor(width / gameOptions.ballSize);
     this.balls = [];
-
     this.startBallTimer();
+
+    // Bin
+    const size = 400;
+    const bin = this.add.image(width / 2, height - size / 2, OBJECTS.BIN);
+    bin.setDisplaySize(size, size);
+
+    this.binCollider = this.matter.add.sprite(width / 2, height - size * 0.75);
+    this.binCollider.setDisplaySize(size * 0.75, 10)
+      .setSensor(true)
+      .setStatic(true);
+
 
     const swipe = this.gestures.add.swipe({
       threshold: 1,
@@ -28,6 +39,16 @@ export default class Main extends Scene {
   }
 
   handleBallCollideWalls({ gameObjectA: ball }) {
+    this.diposeBall(ball);
+  }
+
+  handleBallCollideBin({ gameObjectA: ball }) {
+    if (ball.body.velocity.y > 0) {
+      this.diposeBall(ball);
+    }
+  }
+
+  diposeBall(ball) {
     const ballIndex = this.balls.findIndex(el => el === ball);
     this.balls.splice(ballIndex, 1);
     ball.die();
@@ -51,6 +72,12 @@ export default class Main extends Scene {
         objectA: ball,
         objectB: [this.worldBounds.walls.left, this.worldBounds.walls.right, this.worldBounds.walls.bottom],
         callback: this.handleBallCollideWalls,
+        context: this
+      });
+      this.matterCollision.addOnCollideStart({
+        objectA: ball,
+        objectB: [this.binCollider],
+        callback: this.handleBallCollideBin,
         context: this
       });
 

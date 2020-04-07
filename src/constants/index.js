@@ -5,6 +5,7 @@ export const SCENES = {
 
 export const OBJECTS = {
   BALL: 'BALL',
+  BIN: 'BIN',
 };
 
 export const FONTS = {
