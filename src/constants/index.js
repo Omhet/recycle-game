@@ -13,6 +13,11 @@ export const objects = {
   bin: 'bin',
 };
 
+export const wasteType = {
+  general: 'general',
+  plastic: 'plastic',
+};
+
 export const fonts = {
   main: 'main',
 };
