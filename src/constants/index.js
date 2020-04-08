@@ -29,6 +29,9 @@ export const objects = {
 
 export const wasteType = {
   plastic: 'plastic',
+  glass: 'glass',
+  metal: 'metal',
+  paper: 'paper',
 };
 
 export const fonts = {

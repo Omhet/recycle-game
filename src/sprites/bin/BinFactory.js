@@ -1,9 +1,9 @@
-import { Plastic } from './types';
+import { Plastic, Glass, Metal, Paper } from './types';
 import Phaser from 'phaser';
 export default class WasteFactory {
   constructor({ scene }) {
     this.scene = scene;
-    this.binTypes = [Plastic];
+    this.binTypes = [Plastic, Glass, Metal, Paper];
   }
   getRandomBin() {
     const type = Phaser.Math.RND.pick(this.binTypes);
