@@ -62,12 +62,17 @@ export default class Main extends Scene {
 
     if (typeMatch) {
       this.scoreText.setScore(++this.score);
+      this.bin.increaseFill();
     } else {
       this.lives--;
     }
 
     if (this.lives <= 0) {
       this.gameOver();
+    }
+
+    if (this.bin.checkIfFull()) {
+      this.bin = this.binFactory.getRandomBin();
     }
   }
 
