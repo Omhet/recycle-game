@@ -5,12 +5,14 @@ export const scenes = {
 
 export const objects = {
   waste: {
-    general: 'general',
+    general: 'general-waste',
     plastic: {
       bottle: 'bottle',
     },
   },
-  bin: 'bin',
+  bin: {
+    plastic: 'plastic-bin',
+  },
 };
 
 export const wasteType = {

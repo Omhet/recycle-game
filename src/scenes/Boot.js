@@ -8,6 +8,7 @@ export default class Boot extends Scene {
 
   preload() {
     const { load } = this;
+    // Waste
     load.image(
       objects.waste.general,
       require('../assets/sprites/waste/general.png')
@@ -16,7 +17,12 @@ export default class Boot extends Scene {
       objects.waste.plastic.bottle,
       require('../assets/sprites/waste/plastic/bottle.png')
     );
-    load.image(objects.bin, require('../assets/sprites/bin.png'));
+    // Bin
+    load.image(
+      objects.bin.plastic,
+      require('../assets/sprites/bin/plastic.png')
+    );
+    // Font
     load.bitmapFont(
       fonts.main,
       require('../assets/fonts/font.png'),

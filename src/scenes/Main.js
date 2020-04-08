@@ -1,6 +1,6 @@
 import { scenes } from '../constants';
 import { Scene } from 'phaser';
-import { WasteFactory, Bin } from '../sprites';
+import { WasteFactory, BinFactory } from '../sprites';
 import { isIntersecting } from '../utils/misc';
 
 export default class Main extends Scene {
@@ -25,7 +25,8 @@ export default class Main extends Scene {
     this.startWasteTimer();
 
     // Bin
-    this.bin = new Bin({ scene: this });
+    this.binFactory = new BinFactory({ scene: this });
+    this.bin = this.binFactory.getRandomBin();
 
     const swipe = this.gestures.add.swipe({
       threshold: 1,
