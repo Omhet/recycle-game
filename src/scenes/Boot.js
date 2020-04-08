@@ -17,11 +17,26 @@ export default class Boot extends Scene {
       objects.waste.plastic.bottle,
       require('../assets/sprites/waste/plastic/bottle.png')
     );
+    load.image(
+      objects.waste.glass.bottle,
+      require('../assets/sprites/waste/glass/bottle.png')
+    );
+    load.image(
+      objects.waste.metal.can,
+      require('../assets/sprites/waste/metal/can.png')
+    );
+    load.image(
+      objects.waste.paper.scrap,
+      require('../assets/sprites/waste/paper/scrap.png')
+    );
     // Bin
     load.image(
       objects.bin.plastic,
       require('../assets/sprites/bin/plastic.png')
     );
+    load.image(objects.bin.glass, require('../assets/sprites/bin/glass.png'));
+    load.image(objects.bin.metal, require('../assets/sprites/bin/metal.png'));
+    load.image(objects.bin.paper, require('../assets/sprites/bin/paper.png'));
     // Font
     load.bitmapFont(
       fonts.main,

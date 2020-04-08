@@ -9,9 +9,21 @@ export const objects = {
     plastic: {
       bottle: 'bottle',
     },
+    glass: {
+      bottle: 'bottle',
+    },
+    metal: {
+      can: 'can',
+    },
+    paper: {
+      scrap: 'scrap',
+    },
   },
   bin: {
     plastic: 'plastic-bin',
+    glass: 'glass-bin',
+    metal: 'metal-bin',
+    paper: 'paper-bin',
   },
 };
 
