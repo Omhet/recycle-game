@@ -7,10 +7,10 @@ export const objects = {
   waste: {
     general: 'general-waste',
     plastic: {
-      bottle: 'bottle',
+      bottle: 'plastic-bottle',
     },
     glass: {
-      bottle: 'bottle',
+      bottle: 'glass-bottle',
     },
     metal: {
       can: 'can',
@@ -36,6 +36,11 @@ export const wasteType = {
 
 export const fonts = {
   main: 'main',
+};
+
+export const gameOptions = {
+  wasteSize: 110,
+  lives: 3,
 };
 
 export default {

@@ -44,14 +44,12 @@ const config = {
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
 };
-
-export let gameOptions = {
+let gameOptions = {
   defaultSize: {
     width: 750,
     height: 1334,
     maxRatio: 4 / 3,
   },
-  ballSize: 110,
 };
 
 window.onload = function() {

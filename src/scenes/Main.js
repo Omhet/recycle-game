@@ -1,4 +1,4 @@
-import { scenes } from '../constants';
+import { scenes, gameOptions } from '../constants';
 import { Scene } from 'phaser';
 import { WasteFactory, BinFactory } from '../sprites';
 import { isIntersecting } from '../utils/misc';
@@ -20,6 +20,9 @@ export default class Main extends Scene {
       width + wallOffset * 2,
       height + wallOffset
     );
+
+    // General
+    this.lives = gameOptions.lives;
 
     // Waste
     this.wasteFactory = new WasteFactory({ scene: this });
@@ -49,12 +52,30 @@ export default class Main extends Scene {
 
   handleWasteCollideBin({ gameObjectA: waste }) {
     if (waste.body.velocity.y > 0) {
-      this.diposeWaste(waste);
-      const typeMatch = this.bin.checkIfTypeMatch(waste.type);
-      if (typeMatch) {
-        this.scoreText.setScore(++this.score);
-      }
+      this.hitBin(waste);
     }
+  }
+
+  hitBin(waste) {
+    this.diposeWaste(waste);
+    const typeMatch = this.bin.checkIfTypeMatch(waste.type);
+
+    if (typeMatch) {
+      this.scoreText.setScore(++this.score);
+    } else {
+      this.lives--;
+    }
+
+    if (this.lives <= 0) {
+      this.gameOver();
+    }
+  }
+
+  gameOver() {
+    this.lives = gameOptions.lives;
+    this.score = 0;
+    this.scoreText.setScore(0);
+    this.cameras.main.flash();
   }
 
   diposeWaste(waste) {
