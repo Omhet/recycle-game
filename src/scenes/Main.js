@@ -72,10 +72,11 @@ export default class Main extends Scene {
   }
 
   gameOver() {
-    this.lives = gameOptions.lives;
-    this.score = 0;
-    this.scoreText.setScore(0);
-    this.cameras.main.flash();
+    this.cameras.main.flash(350, 255, 255, 255, false, (cam, progress) => {
+      if (progress === 1) {
+        this.scene.restart();
+      }
+    });
   }
 
   diposeWaste(waste) {
