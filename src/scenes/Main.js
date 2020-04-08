@@ -72,6 +72,7 @@ export default class Main extends Scene {
   }
 
   gameOver() {
+    this.wasteTimer.destroy();
     this.cameras.main.flash(350, 255, 255, 255, false, (cam, progress) => {
       if (progress === 1) {
         this.scene.restart();
