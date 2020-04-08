@@ -1,4 +1,4 @@
-import { objects, scenes, fonts } from '../constants';
+import { objects, scenes, fonts, images } from '../constants';
 import { Scene } from 'phaser';
 
 export default class Boot extends Scene {
@@ -43,6 +43,8 @@ export default class Boot extends Scene {
       require('../assets/fonts/font.png'),
       require('../assets/fonts/font.fnt')
     );
+    // Misc
+    load.image(images.logo, require('../assets/sprites/logo.png'));
   }
 
   create() {

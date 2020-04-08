@@ -38,13 +38,12 @@ export const fonts = {
   main: 'main',
 };
 
+export const images = {
+  logo: 'logo',
+};
+
 export const gameOptions = {
   wasteSize: 110,
   lives: 3,
-};
-
-export default {
-  scenes,
-  objects,
-  fonts,
+  showStartScreen: true,
 };
