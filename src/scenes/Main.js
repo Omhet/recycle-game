@@ -2,6 +2,7 @@ import { scenes } from '../constants';
 import { Scene } from 'phaser';
 import { WasteFactory, BinFactory } from '../sprites';
 import { isIntersecting } from '../utils/misc';
+import { Score } from '../texts';
 
 export default class Main extends Scene {
   constructor() {
@@ -11,6 +12,7 @@ export default class Main extends Scene {
   create() {
     const { width, height } = this.game.config;
 
+    // World
     const wallOffset = 200;
     this.worldBounds = this.matter.world.setBounds(
       -wallOffset,
@@ -28,6 +30,10 @@ export default class Main extends Scene {
     this.binFactory = new BinFactory({ scene: this });
     this.bin = this.binFactory.getRandomBin();
 
+    // Score
+    this.score = new Score({ scene: this, text: 0 });
+
+    // Controls
     const swipe = this.gestures.add.swipe({
       threshold: 1,
       velocityThreshold: 1,

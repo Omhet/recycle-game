@@ -1,26 +1,14 @@
 import { GameObjects } from 'phaser';
 
-/**
- * Template for displaying the score.
- *
- * @param  {Number} score
- * @return {String}
- */
 const scoreTemplate = score => `Score: ${score}`;
 
 export default class Score extends GameObjects.Text {
-  constructor(scene, x, y, text, style) {
-    super(scene, x, y, scoreTemplate(text), style);
+  constructor({ scene, text }) {
+    super(scene, 32, 32, scoreTemplate(text), { fontSize: '48px' });
 
-    // Add text to the scene.
     scene.add.existing(this);
   }
 
-  /**
-   * Updates the score text.
-   *
-   * @param {Number} score
-   */
   setScore = score => {
     this.text = scoreTemplate(score);
   };
