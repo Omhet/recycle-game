@@ -23,7 +23,17 @@ export default class Waste extends Physics.Matter.Sprite {
     delete this;
   }
 
+  getRandomVelocity() {
+    const { width } = this.scene.game.config;
+    let velX = Phaser.Math.Between(0, 8);
+    velX = this.x < width / 2 ? velX : -velX;
+    const velY = Phaser.Math.Between(-20, -30);
+
+    return { velX, velY };
+  }
+
   throw() {
-    this.setVisible(true).setVelocityY(-30);
+    const { velX, velY } = this.getRandomVelocity();
+    this.setVisible(true).setVelocity(velX, velY);
   }
 }
