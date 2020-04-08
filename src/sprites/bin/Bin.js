@@ -17,7 +17,7 @@ export default class Bin extends Physics.Matter.Sprite {
     this.type = type;
   }
 
-  checkType(type) {
+  checkIfTypeMatch(type) {
     return this.type === type;
   }
 }

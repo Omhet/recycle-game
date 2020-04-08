@@ -11,6 +11,6 @@ export default class Score extends GameObjects.BitmapText {
   }
 
   setScore = score => {
-    this.text = scoreTemplate(score);
+    this.setText(scoreTemplate(score));
   };
 }

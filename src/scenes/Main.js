@@ -31,7 +31,8 @@ export default class Main extends Scene {
     this.bin = this.binFactory.getRandomBin();
 
     // Score
-    this.score = new Score({ scene: this, text: 0 });
+    this.score = 0;
+    this.scoreText = new Score({ scene: this, text: this.score });
 
     // Controls
     const swipe = this.gestures.add.swipe({
@@ -49,7 +50,10 @@ export default class Main extends Scene {
   handleWasteCollideBin({ gameObjectA: waste }) {
     if (waste.body.velocity.y > 0) {
       this.diposeWaste(waste);
-      this.bin.checkType(waste.type);
+      const typeMatch = this.bin.checkIfTypeMatch(waste.type);
+      if (typeMatch) {
+        this.scoreText.setScore(++this.score);
+      }
     }
   }
 
