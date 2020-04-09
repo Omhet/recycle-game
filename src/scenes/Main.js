@@ -146,16 +146,16 @@ export default class Main extends Scene {
         },
         duration: 500,
         callbackScope: this,
-        onComplete: newBinMoved,
+        onComplete: this.startNewLevel,
       });
     }
+  }
 
-    function newBinMoved() {
-      this.levelManager.levelUp(++this.binsFilled);
-      this.levelText.setLevel(this.levelManager.level);
-      this.lives = this.levelManager.lives;
-      this.startWasteTimer();
-    }
+  startNewLevel() {
+    this.levelManager.levelUp(++this.binsFilled);
+    this.levelText.setLevel(this.levelManager.level);
+    this.lives = this.levelManager.lives;
+    this.startWasteTimer();
   }
 
   diposeWaste(waste) {
