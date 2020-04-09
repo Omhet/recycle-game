@@ -178,7 +178,9 @@ export default class Main extends Scene {
   }
 
   createWaste() {
-    const waste = this.wasteFactory.getRandomWaste();
+    const waste = this.wasteFactory.getRandomWaste({
+      neededType: this.bin.type,
+    });
 
     this.matterCollision.addOnCollideStart({
       objectA: waste,
