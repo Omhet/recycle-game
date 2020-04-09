@@ -1,7 +1,7 @@
 import { scenes, gameOptions, images } from '../constants';
 import { Scene } from 'phaser';
 import { WasteFactory, BinFactory } from '../sprites';
-import { isIntersecting } from '../utils/misc';
+import { isIntersecting, LevelManager } from '../utils';
 import { Score } from '../texts';
 
 export default class Main extends Scene {
@@ -11,7 +11,7 @@ export default class Main extends Scene {
 
   create() {
     const { width, height } = this.game.config;
-    const { lives, showStartScreen } = gameOptions;
+    const { showStartScreen } = gameOptions;
 
     // World
     const wallOffset = 200;
@@ -23,7 +23,8 @@ export default class Main extends Scene {
     );
 
     // General
-    this.lives = lives;
+    this.levelManager = new LevelManager();
+    this.lives = this.levelManager.lives;
 
     // Waste
     this.wasteFactory = new WasteFactory({ scene: this });
@@ -106,8 +107,15 @@ export default class Main extends Scene {
     }
 
     if (this.bin.checkIfFull()) {
-      this.bin = this.binFactory.getRandomBin();
+      this.levelUp();
     }
+  }
+
+  levelUp() {
+    this.bin = this.binFactory.getRandomBin();
+    this.levelManager.levelUp();
+    this.lives = this.levelManager.lives;
+    this.startWasteTimer();
   }
 
   diposeWaste(waste) {
@@ -117,8 +125,12 @@ export default class Main extends Scene {
   }
 
   startWasteTimer() {
+    if (this.wasteTimer) {
+      this.wasteTimer.destroy();
+    }
+
     this.wasteTimer = this.time.addEvent({
-      delay: 1000,
+      delay: this.levelManager.wasteThrowDelay,
       callback: this.throwWaste,
       callbackScope: this,
       loop: true,
@@ -151,7 +163,7 @@ export default class Main extends Scene {
   }
 
   throwWaste() {
-    if (this.wastes.length < 1) {
+    if (this.wastes.length < this.levelManager.numberOfWastes) {
       const waste = this.createWaste();
       waste.throw();
     }
