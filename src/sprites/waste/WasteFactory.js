@@ -6,13 +6,18 @@ export default class WasteFactory {
     this.scene = scene;
     this.wasteTypes = [General, Plastic, Glass, Metal, Paper];
   }
-  getRandomWaste({ neededType } = {}) {
-    const shouldGiveNeededType = Phaser.Math.Between(0, 1) === 0;
+  getRandomWaste({ neededType, probability } = {}) {
+    const shouldGiveNeededType = Phaser.Math.Between(0, 100) >= probability;
     const type =
       neededType && shouldGiveNeededType
         ? this.getOfType(neededType)
         : Phaser.Math.RND.pick(this.wasteTypes);
 
+    return new type({ scene: this.scene });
+  }
+
+  getWasteOfType(neededType) {
+    const type = this.getOfType(neededType);
     return new type({ scene: this.scene });
   }
 

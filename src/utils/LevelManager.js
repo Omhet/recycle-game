@@ -1,11 +1,12 @@
 export default class LevelManager {
   constructor() {
-    this.level = 1;
+    this.level = 0;
     this.wasteThrowDelay = 1000;
     this.numberOfWastes = 1;
     this.lives = 4;
     this.binsThatLevelUp = [1, 3, 6, 9];
     this.fillLimit = 2;
+    this.wasteProbability = 50;
   }
 
   levelUp(bins) {

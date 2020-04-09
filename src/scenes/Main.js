@@ -45,7 +45,7 @@ export default class Main extends Scene {
 
     if (showStartScreen) {
       this.logo = this.add.image(width / 2, 128, images.logo);
-      const waste = this.createWaste();
+      const waste = this.createWasteOfBinType();
       waste
         .setPosition(width / 2, height / 2)
         .setVisible(true)
@@ -177,11 +177,24 @@ export default class Main extends Scene {
     });
   }
 
-  createWaste() {
+  createWasteOfBinType() {
+    const waste = this.wasteFactory.getWasteOfType(this.bin.type);
+    this.addCollisionToWaste(waste);
+    this.wastes.push(waste);
+    return waste;
+  }
+
+  createRandomWaste() {
     const waste = this.wasteFactory.getRandomWaste({
       neededType: this.bin.type,
+      probability: this.levelManager.wasteProbability,
     });
+    this.addCollisionToWaste(waste);
+    this.wastes.push(waste);
+    return waste;
+  }
 
+  addCollisionToWaste(waste) {
     this.matterCollision.addOnCollideStart({
       objectA: waste,
       objectB: [
@@ -198,15 +211,11 @@ export default class Main extends Scene {
       callback: this.handleWasteCollideBin,
       context: this,
     });
-
-    this.wastes.push(waste);
-
-    return waste;
   }
 
   throwWaste() {
     if (this.wastes.length < this.levelManager.numberOfWastes) {
-      const waste = this.createWaste();
+      const waste = this.createRandomWaste();
       waste.throw();
     }
   }
