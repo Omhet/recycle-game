@@ -118,9 +118,10 @@ export default class Main extends Scene {
   }
 
   replaceBin() {
-    this.wasteTimer.destroy();
-
     const { width } = this.game.config;
+
+    this.wasteTimer.destroy();
+    this.moveWasteAway();
 
     this.moveOldBinTween = this.tweens.add({
       targets: [this.bin, this.bin.binImage],
@@ -148,6 +149,13 @@ export default class Main extends Scene {
         callbackScope: this,
         onComplete: this.startNewLevel,
       });
+    }
+  }
+
+  moveWasteAway() {
+    for (const waste of this.wastes) {
+      const dir = waste.body.velocity.x > 0 ? 1 : -1;
+      waste.setVelocity(20 * dir, -20);
     }
   }
 
