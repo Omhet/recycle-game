@@ -33,7 +33,7 @@ export default class Main extends Scene {
 
     // Bin
     this.binFactory = new BinFactory({ scene: this });
-    this.bin = this.binFactory.getRandomBin();
+    this.bin = this.binFactory.getRandomBin(width / 2);
 
     // Controls
     const swipe = this.gestures.add.swipe({
@@ -118,11 +118,44 @@ export default class Main extends Scene {
   }
 
   levelUp() {
-    this.bin = this.binFactory.getRandomBin();
-    this.levelManager.levelUp(++this.binsFilled);
-    this.levelText.setLevel(this.levelManager.level);
-    this.lives = this.levelManager.lives;
-    this.startWasteTimer();
+    this.wasteTimer.destroy();
+
+    const { width } = this.game.config;
+
+    this.moveOldBinTween = this.tweens.add({
+      targets: [this.bin, this.bin.binImage],
+      x: -500,
+      duration: 500,
+      callbackScope: this,
+      onComplete: oldBinMoved,
+    });
+    function oldBinMoved() {
+      this.bin.destroy();
+      this.bin = this.binFactory.getRandomBin(width);
+
+      this.moveNewBinTween = this.tweens.add({
+        targets: [this.bin, this.bin.binImage],
+        props: {
+          x: {
+            value: {
+              getEnd: () => {
+                return width / 2;
+              },
+            },
+          },
+        },
+        duration: 500,
+        callbackScope: this,
+        onComplete: newBinMoved,
+      });
+    }
+
+    function newBinMoved() {
+      this.levelManager.levelUp(++this.binsFilled);
+      this.levelText.setLevel(this.levelManager.level);
+      this.lives = this.levelManager.lives;
+      this.startWasteTimer();
+    }
   }
 
   diposeWaste(waste) {

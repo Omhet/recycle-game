@@ -5,8 +5,8 @@ export default class WasteFactory {
     this.scene = scene;
     this.binTypes = [Plastic, Glass, Metal, Paper];
   }
-  getRandomBin() {
+  getRandomBin(x) {
     const type = Phaser.Math.RND.pick(this.binTypes);
-    return new type({ scene: this.scene });
+    return new type({ scene: this.scene, x });
   }
 }

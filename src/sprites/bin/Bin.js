@@ -1,14 +1,14 @@
 import Phaser, { Physics } from 'phaser';
 
 export default class Bin extends Physics.Matter.Sprite {
-  constructor({ scene, key, type }) {
-    const { width, height } = scene.game.config;
+  constructor({ scene, x, key, type }) {
+    const { height } = scene.game.config;
     const size = 400;
 
-    super(scene.matter.world, width / 2, height - size * 0.75);
+    super(scene.matter.world, x, height - size * 0.75);
 
-    const binImage = scene.add.image(width / 2, height - size / 2, key);
-    binImage.setDisplaySize(size, size);
+    this.binImage = scene.add.image(x, height - size / 2, key);
+    this.binImage.setDisplaySize(size, size);
 
     this.setDisplaySize(size * 0.68, 10)
       .setSensor(true)
