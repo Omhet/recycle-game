@@ -113,11 +113,11 @@ export default class Main extends Scene {
     }
 
     if (this.bin.checkIfFull()) {
-      this.levelUp();
+      this.replaceBin();
     }
   }
 
-  levelUp() {
+  replaceBin() {
     this.wasteTimer.destroy();
 
     const { width } = this.game.config;
