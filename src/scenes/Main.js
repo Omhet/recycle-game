@@ -25,6 +25,7 @@ export default class Main extends Scene {
     // General
     this.levelManager = new LevelManager();
     this.lives = this.levelManager.lives;
+    this.binsFilled = 0;
 
     // Waste
     this.wasteFactory = new WasteFactory({ scene: this });
@@ -118,7 +119,7 @@ export default class Main extends Scene {
 
   levelUp() {
     this.bin = this.binFactory.getRandomBin();
-    this.levelManager.levelUp();
+    this.levelManager.levelUp(++this.binsFilled);
     this.levelText.setLevel(this.levelManager.level);
     this.lives = this.levelManager.lives;
     this.startWasteTimer();
