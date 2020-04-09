@@ -21,24 +21,28 @@ export default class LevelManager {
         this.wasteThrowDelay = 1000;
         this.numberOfWastes++;
         this.fillLimit++;
+        this.wasteProbability = 40;
 
         break;
       case 3:
         this.wasteThrowDelay = 900;
         this.lives--;
         this.fillLimit++;
+        this.wasteProbability = 35;
 
         break;
       case 4:
         this.wasteThrowDelay = 800;
         this.numberOfWastes++;
         this.fillLimit += 2;
+        this.wasteProbability = 30;
 
         break;
       case 5:
         this.wasteThrowDelay = 700;
         this.lives--;
         this.fillLimit++;
+        this.wasteProbability = 25;
 
         break;
       default:
