@@ -1,4 +1,4 @@
-import Phaser, { Physics } from 'phaser';
+import { Physics } from 'phaser';
 
 export default class Bin extends Physics.Matter.Sprite {
   constructor({ scene, x, key, type }) {
@@ -16,15 +16,14 @@ export default class Bin extends Physics.Matter.Sprite {
 
     this.type = type;
     this.fill = 0;
-    this.fillLimit = Phaser.Math.Between(1, 4);
   }
 
   checkIfTypeMatch(type) {
     return this.type === type;
   }
 
-  checkIfFull() {
-    return this.fill === this.fillLimit;
+  checkIfFull(limit) {
+    return this.fill === limit;
   }
 
   increaseFill() {

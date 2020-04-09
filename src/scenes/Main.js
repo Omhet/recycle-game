@@ -112,7 +112,7 @@ export default class Main extends Scene {
       this.gameOver();
     }
 
-    if (this.bin.checkIfFull()) {
+    if (this.bin.checkIfFull(this.levelManager.fillLimit)) {
       this.replaceBin();
     }
   }
