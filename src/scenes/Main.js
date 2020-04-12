@@ -1,4 +1,4 @@
-import { scenes, gameOptions, images } from '../constants';
+import { scenes, gameOptions, images, objects, animations } from '../constants';
 import { Scene } from 'phaser';
 import { WasteFactory, BinFactory } from '../sprites';
 import { isIntersecting, LevelManager } from '../utils';
@@ -26,6 +26,8 @@ export default class Main extends Scene {
     this.levelManager = new LevelManager();
     this.lives = this.levelManager.lives;
     this.binsFilled = 0;
+
+    this.addAnimations();
 
     // Waste
     this.wasteFactory = new WasteFactory({ scene: this });
@@ -56,6 +58,20 @@ export default class Main extends Scene {
       });
     } else {
       this.startGame();
+    }
+  }
+
+  addAnimations() {
+    for (const bin of Object.values(objects.bin)) {
+      this.anims.create({
+        key: `${bin}-${animations.bin.idle}`,
+        frames: this.anims.generateFrameNumbers(bin, {
+          start: 0,
+          end: 29,
+        }),
+        frameRate: 30,
+        repeat: -1,
+      });
     }
   }
 

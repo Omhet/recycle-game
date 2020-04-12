@@ -34,9 +34,16 @@ export default class Boot extends Scene {
       objects.bin.plastic,
       require('../assets/sprites/bin/plastic.png')
     );
-    load.image(objects.bin.glass, require('../assets/sprites/bin/glass.png'));
     load.image(objects.bin.metal, require('../assets/sprites/bin/metal.png'));
     load.image(objects.bin.paper, require('../assets/sprites/bin/paper.png'));
+    load.spritesheet(
+      objects.bin.glass,
+      require('../assets/sprites/bin/glass.png'),
+      {
+        frameWidth: 600,
+        frameHeight: 600,
+      }
+    );
     // Font
     load.bitmapFont(
       fonts.main,

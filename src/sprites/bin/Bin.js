@@ -1,4 +1,5 @@
 import { Physics } from 'phaser';
+import { animations } from '../../constants';
 
 export default class Bin extends Physics.Matter.Sprite {
   constructor({ scene, x, key, type }) {
@@ -7,7 +8,8 @@ export default class Bin extends Physics.Matter.Sprite {
 
     super(scene.matter.world, x, height - size);
 
-    this.binImage = scene.add.image(x, height, key);
+    this.binImage = scene.add.sprite(x, height, key);
+    this.binImage.anims.play(`${key}-${animations.bin.idle}`);
     this.binImage.setDisplaySize(size * 0.92, size).setOrigin(0.5, 1);
 
     this.setDisplaySize(size * 0.95, 10)

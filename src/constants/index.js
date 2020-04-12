@@ -27,6 +27,12 @@ export const objects = {
   },
 };
 
+export const animations = {
+  bin: {
+    idle: 'idle',
+  },
+};
+
 export const wasteType = {
   plastic: 'plastic',
   glass: 'glass',
