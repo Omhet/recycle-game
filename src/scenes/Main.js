@@ -1,7 +1,7 @@
 import { scenes, gameOptions, images, objects, animations } from '../constants';
 import { Scene } from 'phaser';
 import { WasteFactory, BinFactory } from '../sprites';
-import { isIntersecting, LevelManager } from '../utils';
+import { isIntersecting, LevelManager, getAnimationName } from '../utils';
 import { Score, Level } from '../texts';
 
 export default class Main extends Scene {
@@ -64,7 +64,7 @@ export default class Main extends Scene {
   addAnimations() {
     for (const bin of Object.values(objects.bin)) {
       this.anims.create({
-        key: `${bin}-${animations.bin.idle}`,
+        key: getAnimationName(bin, animations.bin.idle),
         frames: this.anims.generateFrameNumbers(bin, {
           start: 0,
           end: 29,

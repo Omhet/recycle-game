@@ -7,3 +7,7 @@ export function isIntersecting(obj, { x, y }, padding) {
     y <= bottom + padding
   );
 }
+
+export function getAnimationName(bin, animationType) {
+  return `${bin}-${animationType}`;
+}
