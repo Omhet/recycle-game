@@ -16,9 +16,9 @@ export default class Bin extends Physics.Matter.Sprite {
     } catch {
       console.error(`Can't play animation ${anim}`);
     }
-    this.binImage.setDisplaySize(size * 0.92, size).setOrigin(0.5, 1);
+    this.binImage.setOrigin(0.5, 1);
 
-    this.setDisplaySize(size * 0.95, 10)
+    this.setDisplaySize(size, 10)
       .setSensor(true)
       .setStatic(true);
 

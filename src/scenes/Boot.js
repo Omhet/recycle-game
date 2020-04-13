@@ -40,8 +40,8 @@ export default class Boot extends Scene {
       objects.bin.glass,
       require('../assets/sprites/bin/glass.png'),
       {
-        frameWidth: 600,
-        frameHeight: 600,
+        frameWidth: 450,
+        frameHeight: 450,
       }
     );
     // Font
