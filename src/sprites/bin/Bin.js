@@ -9,21 +9,26 @@ export default class Bin extends Physics.Matter.Sprite {
 
     super(scene.matter.world, x, height - size);
 
-    this.binImage = scene.add.sprite(x, height, key);
-    const anim = getAnimationName(key, animations.bin.idle);
-    try {
-      this.binImage.anims.play(anim);
-    } catch {
-      console.error(`Can't play animation ${anim}`);
-    }
-    this.binImage.setOrigin(0.5, 1);
-
     this.setDisplaySize(size, 10)
       .setSensor(true)
       .setStatic(true);
 
+    this.animJoy = getAnimationName(key, animations.bin.joy);
+    this.animIdle = getAnimationName(key, animations.bin.idle);
+
+    this.binImage = scene.add.sprite(x, height, key);
+    this.binImage.anims.play(this.animIdle);
+    this.binImage.setOrigin(0.5, 1);
+    this.binImage.on('animationcomplete', this.handleAnimationComplete, this);
+
     this.type = type;
     this.fill = 0;
+  }
+
+  handleAnimationComplete(anim) {
+    if (anim.key === this.animJoy) {
+      this.binImage.anims.play(this.animIdle);
+    }
   }
 
   checkIfTypeMatch(type) {
@@ -35,6 +40,7 @@ export default class Bin extends Physics.Matter.Sprite {
   }
 
   increaseFill() {
+    this.binImage.anims.play(this.animJoy);
     this.fill++;
   }
 }

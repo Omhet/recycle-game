@@ -72,6 +72,15 @@ export default class Main extends Scene {
         frameRate: 80,
         repeat: -1,
       });
+      this.anims.create({
+        key: getAnimationName(bin, animations.bin.joy),
+        frames: this.anims.generateFrameNumbers(bin, {
+          start: 30,
+          end: 34,
+        }),
+        frameRate: 30,
+        repeat: 1,
+      });
     }
   }
 
