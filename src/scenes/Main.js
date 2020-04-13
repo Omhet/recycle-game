@@ -63,9 +63,12 @@ export default class Main extends Scene {
 
   addAnimations() {
     for (const bin of Object.values(objects.bin)) {
+      const idle = getAnimationName(bin, animations.bin.idle);
+      const joy = getAnimationName(bin, animations.bin.joy);
+      const puke = getAnimationName(bin, animations.bin.puke);
       this.anims.create({
-        key: getAnimationName(bin, animations.bin.idle),
-        frames: this.anims.generateFrameNumbers(bin, {
+        key: idle,
+        frames: this.anims.generateFrameNumbers(idle, {
           start: 0,
           end: 29,
         }),
@@ -73,19 +76,19 @@ export default class Main extends Scene {
         repeat: -1,
       });
       this.anims.create({
-        key: getAnimationName(bin, animations.bin.joy),
-        frames: this.anims.generateFrameNumbers(bin, {
-          start: 30,
-          end: 34,
+        key: joy,
+        frames: this.anims.generateFrameNumbers(joy, {
+          start: 0,
+          end: 7,
         }),
         frameRate: 30,
         repeat: 1,
       });
       this.anims.create({
-        key: getAnimationName(bin, animations.bin.puke),
-        frames: this.anims.generateFrameNumbers(bin, {
-          start: 45,
-          end: 51,
+        key: puke,
+        frames: this.anims.generateFrameNumbers(puke, {
+          start: 0,
+          end: 7,
         }),
         frameRate: 30,
         repeat: 1,

@@ -1,4 +1,5 @@
-import { objects, scenes, fonts, images } from '../constants';
+import { objects, scenes, fonts, images, animations } from '../constants';
+import { getAnimationName } from '../utils';
 import { Scene } from 'phaser';
 
 export default class Boot extends Scene {
@@ -36,9 +37,26 @@ export default class Boot extends Scene {
     );
     load.image(objects.bin.metal, require('../assets/sprites/bin/metal.png'));
     load.image(objects.bin.paper, require('../assets/sprites/bin/paper.png'));
+    // Glass
     load.spritesheet(
-      objects.bin.glass,
-      require('../assets/sprites/bin/glass.png'),
+      getAnimationName(objects.bin.glass, animations.bin.idle),
+      require('../assets/sprites/bin/glass/idle.png'),
+      {
+        frameWidth: 450,
+        frameHeight: 450,
+      }
+    );
+    load.spritesheet(
+      getAnimationName(objects.bin.glass, animations.bin.joy),
+      require('../assets/sprites/bin/glass/joy.png'),
+      {
+        frameWidth: 450,
+        frameHeight: 450,
+      }
+    );
+    load.spritesheet(
+      getAnimationName(objects.bin.glass, animations.bin.puke),
+      require('../assets/sprites/bin/glass/puke.png'),
       {
         frameWidth: 450,
         frameHeight: 450,
