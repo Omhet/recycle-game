@@ -69,7 +69,7 @@ export default class Main extends Scene {
           start: 0,
           end: 29,
         }),
-        frameRate: 40,
+        frameRate: 80,
         repeat: -1,
       });
     }
