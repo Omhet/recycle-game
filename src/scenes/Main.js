@@ -81,6 +81,15 @@ export default class Main extends Scene {
         frameRate: 30,
         repeat: 1,
       });
+      this.anims.create({
+        key: getAnimationName(bin, animations.bin.puke),
+        frames: this.anims.generateFrameNumbers(bin, {
+          start: 45,
+          end: 51,
+        }),
+        frameRate: 30,
+        repeat: 1,
+      });
     }
   }
 
@@ -128,8 +137,9 @@ export default class Main extends Scene {
 
     if (typeMatch) {
       this.scoreText.setScore(++this.score);
-      this.bin.increaseFill();
+      this.bin.hitRight();
     } else {
+      this.bin.hitWrong();
       this.cameras.main.shake(100, 0.01);
       this.lives--;
     }

@@ -31,6 +31,7 @@ export const animations = {
   bin: {
     idle: 'idle',
     joy: 'joy',
+    puke: 'puke',
   },
 };
 

@@ -15,6 +15,7 @@ export default class Bin extends Physics.Matter.Sprite {
 
     this.animJoy = getAnimationName(key, animations.bin.joy);
     this.animIdle = getAnimationName(key, animations.bin.idle);
+    this.animPuke = getAnimationName(key, animations.bin.puke);
 
     this.binImage = scene.add.sprite(x, height, key);
     this.binImage.anims.play(this.animIdle);
@@ -26,7 +27,7 @@ export default class Bin extends Physics.Matter.Sprite {
   }
 
   handleAnimationComplete(anim) {
-    if (anim.key === this.animJoy) {
+    if (anim.key === this.animJoy || anim.key === this.animPuke) {
       this.binImage.anims.play(this.animIdle);
     }
   }
@@ -39,8 +40,16 @@ export default class Bin extends Physics.Matter.Sprite {
     return this.fill === limit;
   }
 
-  increaseFill() {
+  hitWrong() {
+    this.binImage.anims.play(this.animPuke);
+  }
+
+  hitRight() {
     this.binImage.anims.play(this.animJoy);
+    this.increaseFill();
+  }
+
+  increaseFill() {
     this.fill++;
   }
 }
