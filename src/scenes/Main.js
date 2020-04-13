@@ -121,6 +121,7 @@ export default class Main extends Scene {
       this.scoreText.setScore(++this.score);
       this.bin.increaseFill();
     } else {
+      this.cameras.main.shake(100, 0.01);
       this.lives--;
     }
 
