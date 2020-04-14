@@ -96,12 +96,16 @@ export default class Main extends Scene {
     this.wasteTimer.destroy();
     this.bin.die();
     this.scoreText.destroy();
-    new GameOver({ scene: this });
-    // this.cameras.main.flash(350, 255, 255, 255, false, (cam, progress) => {
-    //   if (progress === 1) {
-    //     this.scene.restart();
-    //   }
-    // });
+    const gameOver = new GameOver({ scene: this });
+    this.input.once('pointerdown', () => {
+      gameOver.destroy();
+      this.bin.binImage.destroy();
+      this.cameras.main.flash(350, 255, 255, 255, false, (cam, progress) => {
+        if (progress === 1) {
+          this.scene.restart();
+        }
+      });
+    });
   }
 
   addScore() {
