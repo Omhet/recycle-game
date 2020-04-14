@@ -62,6 +62,14 @@ export default class Boot extends Scene {
         frameHeight: 450,
       }
     );
+    load.spritesheet(
+      getAnimationName(objects.bin.glass, animations.bin.dead),
+      require('../assets/sprites/bin/glass/dead.png'),
+      {
+        frameWidth: 450,
+        frameHeight: 450,
+      }
+    );
     // Font
     load.bitmapFont(
       fonts.main,

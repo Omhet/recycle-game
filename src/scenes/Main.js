@@ -63,35 +63,22 @@ export default class Main extends Scene {
 
   addAnimations() {
     for (const bin of Object.values(objects.bin)) {
-      const idle = getAnimationName(bin, animations.bin.idle);
-      const joy = getAnimationName(bin, animations.bin.joy);
-      const puke = getAnimationName(bin, animations.bin.puke);
+      this.addBinAnimations(bin);
+    }
+  }
+
+  addBinAnimations(bin) {
+    for (const anim of Object.values(animations.bin)) {
+      const animName = getAnimationName(bin, anim);
+      const isIdle = anim === animations.bin.idle;
+      const isDead = anim === animations.bin.dead;
+      const frameRate = isIdle ? 80 : 30;
+      const repeat = isIdle ? -1 : isDead ? 0 : 1;
       this.anims.create({
-        key: idle,
-        frames: this.anims.generateFrameNumbers(idle, {
-          start: 0,
-          end: 29,
-        }),
-        frameRate: 80,
-        repeat: -1,
-      });
-      this.anims.create({
-        key: joy,
-        frames: this.anims.generateFrameNumbers(joy, {
-          start: 0,
-          end: 7,
-        }),
-        frameRate: 30,
-        repeat: 1,
-      });
-      this.anims.create({
-        key: puke,
-        frames: this.anims.generateFrameNumbers(puke, {
-          start: 0,
-          end: 7,
-        }),
-        frameRate: 30,
-        repeat: 1,
+        key: animName,
+        frames: this.anims.generateFrameNumbers(animName),
+        frameRate,
+        repeat,
       });
     }
   }
@@ -108,11 +95,12 @@ export default class Main extends Scene {
 
   gameOver() {
     this.wasteTimer.destroy();
-    this.cameras.main.flash(350, 255, 255, 255, false, (cam, progress) => {
-      if (progress === 1) {
-        this.scene.restart();
-      }
-    });
+    this.bin.die();
+    // this.cameras.main.flash(350, 255, 255, 255, false, (cam, progress) => {
+    //   if (progress === 1) {
+    //     this.scene.restart();
+    //   }
+    // });
   }
 
   addScore() {

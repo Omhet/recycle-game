@@ -32,6 +32,7 @@ export const animations = {
     idle: 'idle',
     joy: 'joy',
     puke: 'puke',
+    dead: 'dead',
   },
 };
 
