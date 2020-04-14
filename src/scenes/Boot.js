@@ -70,6 +70,39 @@ export default class Boot extends Scene {
         frameHeight: 450,
       }
     );
+    // Paper
+    load.spritesheet(
+      getAnimationName(objects.bin.paper, animations.bin.idle),
+      require('../assets/sprites/bin/paper/idle.png'),
+      {
+        frameWidth: 450,
+        frameHeight: 450,
+      }
+    );
+    load.spritesheet(
+      getAnimationName(objects.bin.paper, animations.bin.joy),
+      require('../assets/sprites/bin/paper/joy.png'),
+      {
+        frameWidth: 450,
+        frameHeight: 450,
+      }
+    );
+    load.spritesheet(
+      getAnimationName(objects.bin.paper, animations.bin.puke),
+      require('../assets/sprites/bin/paper/puke.png'),
+      {
+        frameWidth: 450,
+        frameHeight: 450,
+      }
+    );
+    load.spritesheet(
+      getAnimationName(objects.bin.paper, animations.bin.dead),
+      require('../assets/sprites/bin/paper/dead.png'),
+      {
+        frameWidth: 450,
+        frameHeight: 450,
+      }
+    );
     // Font
     load.bitmapFont(
       fonts.main,
