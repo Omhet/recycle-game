@@ -22,8 +22,8 @@ export const objects = {
   bin: {
     glass: 'glass-bin',
     paper: 'paper-bin',
-    // plastic: 'plastic-bin',
-    // metal: 'metal-bin',
+    metal: 'metal-bin',
+    plastic: 'plastic-bin',
   },
 };
 
