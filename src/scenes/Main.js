@@ -2,7 +2,7 @@ import { scenes, gameOptions, images, objects, animations } from '../constants';
 import { Scene } from 'phaser';
 import { WasteFactory, BinFactory } from '../sprites';
 import { isIntersecting, LevelManager, getAnimationName } from '../utils';
-import { Score, Level, GameOver } from '../texts';
+import { Score, GameOver } from '../texts';
 
 export default class Main extends Scene {
   constructor() {
@@ -87,7 +87,6 @@ export default class Main extends Scene {
     gameOptions.showStartScreen = false;
     this.startWasteTimer();
     this.addScore();
-    this.addLevel();
     if (this.logo) {
       this.logo.destroy();
     }
@@ -107,10 +106,6 @@ export default class Main extends Scene {
   addScore() {
     this.score = 0;
     this.scoreText = new Score({ scene: this, text: this.score });
-  }
-
-  addLevel() {
-    this.levelText = new Level({ scene: this, text: this.levelManager.level });
   }
 
   handleWasteCollideWalls({ gameObjectA: waste }) {
@@ -189,7 +184,6 @@ export default class Main extends Scene {
 
   startNewLevel() {
     this.levelManager.levelUp(++this.binsFilled);
-    this.levelText.setLevel(this.levelManager.level);
     this.lives = this.levelManager.lives;
     this.startWasteTimer();
   }
