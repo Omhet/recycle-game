@@ -2,7 +2,7 @@ import { scenes, gameOptions, images, objects, animations } from '../constants';
 import { Scene } from 'phaser';
 import { WasteFactory, BinFactory } from '../sprites';
 import { isIntersecting, LevelManager, getAnimationName } from '../utils';
-import { Score, Level } from '../texts';
+import { Score, Level, GameOver } from '../texts';
 
 export default class Main extends Scene {
   constructor() {
@@ -96,6 +96,7 @@ export default class Main extends Scene {
   gameOver() {
     this.wasteTimer.destroy();
     this.bin.die();
+    new GameOver({ scene: this });
     // this.cameras.main.flash(350, 255, 255, 255, false, (cam, progress) => {
     //   if (progress === 1) {
     //     this.scene.restart();

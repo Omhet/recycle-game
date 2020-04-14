@@ -34,6 +34,7 @@ export default class Bin extends Physics.Matter.Sprite {
   }
 
   die() {
+    this.destroy();
     this.binImage.anims.play(this.animDead);
   }
 
