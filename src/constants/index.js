@@ -20,10 +20,10 @@ export const objects = {
     },
   },
   bin: {
-    plastic: 'plastic-bin',
     glass: 'glass-bin',
-    metal: 'metal-bin',
     paper: 'paper-bin',
+    // plastic: 'plastic-bin',
+    // metal: 'metal-bin',
   },
 };
 

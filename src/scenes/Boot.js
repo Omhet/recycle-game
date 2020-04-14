@@ -30,79 +30,20 @@ export default class Boot extends Scene {
       objects.waste.paper.scrap,
       require('../assets/sprites/waste/paper/scrap.png')
     );
-    // Bin
-    load.image(
-      objects.bin.plastic,
-      require('../assets/sprites/bin/plastic.png')
-    );
-    load.image(objects.bin.metal, require('../assets/sprites/bin/metal.png'));
-    load.image(objects.bin.paper, require('../assets/sprites/bin/paper.png'));
+    // Bins
     // Glass
-    load.spritesheet(
-      getAnimationName(objects.bin.glass, animations.bin.idle),
-      require('../assets/sprites/bin/glass/idle.png'),
-      {
-        frameWidth: 450,
-        frameHeight: 450,
+    for (const bin of Object.values(objects.bin)) {
+      for (const anim of Object.values(animations.bin)) {
+        load.spritesheet(
+          getAnimationName(bin, anim),
+          require(`../assets/sprites/bin/${bin}/${anim}.png`),
+          {
+            frameWidth: 450,
+            frameHeight: 450,
+          }
+        );
       }
-    );
-    load.spritesheet(
-      getAnimationName(objects.bin.glass, animations.bin.joy),
-      require('../assets/sprites/bin/glass/joy.png'),
-      {
-        frameWidth: 450,
-        frameHeight: 450,
-      }
-    );
-    load.spritesheet(
-      getAnimationName(objects.bin.glass, animations.bin.puke),
-      require('../assets/sprites/bin/glass/puke.png'),
-      {
-        frameWidth: 450,
-        frameHeight: 450,
-      }
-    );
-    load.spritesheet(
-      getAnimationName(objects.bin.glass, animations.bin.dead),
-      require('../assets/sprites/bin/glass/dead.png'),
-      {
-        frameWidth: 450,
-        frameHeight: 450,
-      }
-    );
-    // Paper
-    load.spritesheet(
-      getAnimationName(objects.bin.paper, animations.bin.idle),
-      require('../assets/sprites/bin/paper/idle.png'),
-      {
-        frameWidth: 450,
-        frameHeight: 450,
-      }
-    );
-    load.spritesheet(
-      getAnimationName(objects.bin.paper, animations.bin.joy),
-      require('../assets/sprites/bin/paper/joy.png'),
-      {
-        frameWidth: 450,
-        frameHeight: 450,
-      }
-    );
-    load.spritesheet(
-      getAnimationName(objects.bin.paper, animations.bin.puke),
-      require('../assets/sprites/bin/paper/puke.png'),
-      {
-        frameWidth: 450,
-        frameHeight: 450,
-      }
-    );
-    load.spritesheet(
-      getAnimationName(objects.bin.paper, animations.bin.dead),
-      require('../assets/sprites/bin/paper/dead.png'),
-      {
-        frameWidth: 450,
-        frameHeight: 450,
-      }
-    );
+    }
     // Font
     load.bitmapFont(
       fonts.main,
