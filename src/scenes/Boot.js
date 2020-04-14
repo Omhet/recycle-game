@@ -31,7 +31,6 @@ export default class Boot extends Scene {
       require('../assets/sprites/waste/paper/scrap.png')
     );
     // Bins
-    // Glass
     for (const bin of Object.values(objects.bin)) {
       for (const anim of Object.values(animations.bin)) {
         load.spritesheet(
