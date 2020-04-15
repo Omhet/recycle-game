@@ -4,8 +4,7 @@ import Phaser from 'phaser';
 export default class WasteFactory {
   constructor({ scene }) {
     this.scene = scene;
-    // this.wasteTypes = [General, Plastic, Glass, Metal, Paper];
-    this.wasteTypes = [Plastic];
+    this.wasteTypes = [General, Plastic, Glass, Metal, Paper];
   }
   getRandomWaste({ neededType, probability } = {}) {
     const shouldGiveNeededType = Phaser.Math.Between(0, 100) >= probability;
