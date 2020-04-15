@@ -52,6 +52,5 @@ export const images = {
 };
 
 export const gameOptions = {
-  wasteSize: 110,
   showStartScreen: true,
 };
