@@ -27,8 +27,8 @@ export default class Boot extends Scene {
       require('../assets/sprites/waste/metal/can.png')
     );
     load.image(
-      objects.waste.paper.scrap,
-      require('../assets/sprites/waste/paper/scrap.png')
+      objects.waste.paper.ball,
+      require('../assets/sprites/waste/paper/ball.png')
     );
     // Bins
     for (const bin of Object.values(objects.bin)) {

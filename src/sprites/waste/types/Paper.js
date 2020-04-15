@@ -5,7 +5,7 @@ export default class Paper extends Waste {
   constructor({ scene }) {
     super({
       scene,
-      key: objects.waste.paper.scrap,
+      key: objects.waste.paper.ball,
       type: wasteType.paper,
     });
   }

@@ -16,7 +16,7 @@ export const objects = {
       can: 'can',
     },
     paper: {
-      scrap: 'scrap',
+      ball: 'ball',
     },
   },
   bin: {
