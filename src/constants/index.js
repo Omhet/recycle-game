@@ -32,7 +32,12 @@ export const objects = {
     grass: 'grass',
     shrub: 'shrub',
     city: 'city',
-    cityBack: 'cityBack',
+    cityBack: 'city-back',
+    clouds: {
+      cloud0: 'cloud-0',
+      cloud1: 'cloud-1',
+      cloud2: 'cloud-2',
+    },
   },
 };
 

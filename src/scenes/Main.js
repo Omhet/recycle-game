@@ -1,5 +1,5 @@
 import { scenes, gameOptions, images, objects, animations } from '../constants';
-import { Scene } from 'phaser';
+import Phaser, { Scene } from 'phaser';
 import { WasteFactory, BinFactory } from '../sprites';
 import { isIntersecting, LevelManager, getAnimationName } from '../utils';
 import { Score, GameOver } from '../texts';
@@ -76,6 +76,45 @@ export default class Main extends Scene {
     this.fillScene(objects.back.cityBack, grassTop - 20);
     this.fillScene(objects.back.city, grassTop);
     this.fillScene(objects.back.shrub, grassTop);
+
+    this.addClouds();
+  }
+
+  addClouds() {
+    this.cloudTimer = this.time.addEvent({
+      delay: 8000,
+      callback: this.addCloud,
+      callbackScope: this,
+      loop: true,
+    });
+    this.addCloud();
+  }
+
+  addCloud() {
+    const { width } = this.game.config;
+    const index = Phaser.Math.Between(0, 2);
+    const scale = Phaser.Math.RND.realInRange(0.6, 1).toFixed(2);
+    const offset = 300;
+    const [initX, finalX] =
+      Phaser.Math.Between(0, 1) === 1
+        ? [-offset, width + offset]
+        : [width + offset, -offset];
+    const key = objects.back.clouds[`cloud${index}`];
+    const cloud = this.add
+      .image(initX, 100, key)
+      .setOrigin(0, 0)
+      .setScale(scale);
+    this.tweens.add({
+      targets: [cloud],
+      x: {
+        value: {
+          getEnd: () => finalX,
+        },
+      },
+      duration: 20000,
+      callbackScope: this,
+      onComplete: () => cloud.destroy(),
+    });
   }
 
   fillSceneContinuous(key, y) {

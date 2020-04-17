@@ -70,8 +70,14 @@ export default class Boot extends Scene {
     );
     load.image(
       objects.back.cityBack,
-      require('../assets/sprites/background/cityBack.png')
+      require('../assets/sprites/background/city-back.png')
     );
+    for (let i = 0; i < 3; i++) {
+      load.image(
+        objects.back.clouds[`cloud${i}`],
+        require(`../assets/sprites/background/cloud-${i}.png`)
+      );
+    }
     // Font
     load.bitmapFont(
       fonts.main,
