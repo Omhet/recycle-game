@@ -29,6 +29,7 @@ export const objects = {
     gradient: 'gradient',
     floor: 'floor',
     pavement: 'pavement',
+    grass: 'grass',
   },
 };
 

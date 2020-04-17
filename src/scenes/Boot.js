@@ -56,6 +56,10 @@ export default class Boot extends Scene {
       objects.back.pavement,
       require('../assets/sprites/background/pavement.png')
     );
+    load.image(
+      objects.back.grass,
+      require('../assets/sprites/background/grass.png')
+    );
     // Font
     load.bitmapFont(
       fonts.main,

@@ -70,23 +70,32 @@ export default class Main extends Scene {
       .setOrigin(0, 0)
       .setDisplaySize(width + 100, height);
 
-    const { height: floorHeight } = this.getImageSize(objects.back.floor);
-    this.add
-      .image(0, height, objects.back.floor)
-      .setOrigin(0, 1)
-      .setDisplaySize(width + 200, floorHeight);
+    const floorTop = this.fillSceneContinuous(objects.back.floor, height);
+    const pavementTop = this.fillScene(objects.back.pavement, floorTop);
+    this.fillSceneContinuous(objects.back.grass, pavementTop);
+  }
 
-    this.fillScene(objects.back.pavement, height - floorHeight);
+  fillSceneContinuous(key, y) {
+    const { width } = this.game.config;
+    const { height: imageHeight } = this.getImageSize(key);
+    this.add
+      .image(-100, y, key)
+      .setOrigin(0, 1)
+      .setDisplaySize(width + 200, imageHeight);
+
+    return y - imageHeight;
   }
 
   fillScene(key, y) {
     const { width } = this.game.config;
-    const { width: imageWidth } = this.getImageSize(key);
+    const { width: imageWidth, height: imageHeight } = this.getImageSize(key);
     const images = Math.ceil(width / imageWidth);
     const offset = Math.floor(Math.abs(width - images * imageWidth) / 2);
     for (let i = 0; i < images; i++) {
       this.add.image(i * imageWidth - offset, y, key).setOrigin(0, 1);
     }
+
+    return y - imageHeight;
   }
 
   getImageSize(key) {
