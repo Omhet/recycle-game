@@ -12,7 +12,7 @@
     "release": "standard-version --no-verify",
     "start": "node scripts/start"
   },
-  "homepage": "https://github.com/Omhet/recycle-game/",
+  "homepage": "https://omhet.github.io/recycle-game",
   "repository": {
     "type": "git",
     "url": "https://github.com/Omhet/recycle-game"
