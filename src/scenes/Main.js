@@ -81,24 +81,27 @@ export default class Main extends Scene {
   }
 
   addClouds() {
+    const leftToRight = Phaser.Math.Between(0, 1) === 1;
+
     this.cloudTimer = this.time.addEvent({
       delay: 8000,
-      callback: this.addCloud,
+      callback: () => {
+        this.addCloud(leftToRight);
+      },
       callbackScope: this,
       loop: true,
     });
-    this.addCloud();
+    this.addCloud(leftToRight);
   }
 
-  addCloud() {
+  addCloud(leftToRight) {
     const { width } = this.game.config;
     const index = Phaser.Math.Between(0, 2);
     const scale = Phaser.Math.RND.realInRange(0.6, 1).toFixed(2);
     const offset = 300;
-    const [initX, finalX] =
-      Phaser.Math.Between(0, 1) === 1
-        ? [-offset, width + offset]
-        : [width + offset, -offset];
+    const [initX, finalX] = leftToRight
+      ? [-offset, width + offset]
+      : [width + offset, -offset];
     const key = objects.back.clouds[`cloud${index}`];
     const cloud = this.add
       .image(initX, 100, key)
