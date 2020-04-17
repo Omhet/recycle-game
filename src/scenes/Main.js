@@ -81,10 +81,10 @@ export default class Main extends Scene {
   }
 
   addClouds() {
+    const { width } = this.game.config;
     const leftToRight = Phaser.Math.Between(0, 1) === 1;
-
     this.cloudTimer = this.time.addEvent({
-      delay: 8000,
+      delay: width * 12,
       callback: () => {
         this.addCloud(leftToRight);
       },
@@ -103,6 +103,7 @@ export default class Main extends Scene {
       ? [-offset, width + offset]
       : [width + offset, -offset];
     const key = objects.back.clouds[`cloud${index}`];
+
     const cloud = this.add
       .image(initX, 100, key)
       .setOrigin(0, 0)
@@ -114,7 +115,7 @@ export default class Main extends Scene {
           getEnd: () => finalX,
         },
       },
-      duration: 20000,
+      duration: width * 30,
       callbackScope: this,
       onComplete: () => cloud.destroy(),
     });
