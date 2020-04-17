@@ -30,6 +30,7 @@ export const objects = {
     floor: 'floor',
     pavement: 'pavement',
     grass: 'grass',
+    shrub: 'shrub',
   },
 };
 
