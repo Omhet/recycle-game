@@ -27,6 +27,8 @@ export default class Main extends Scene {
     this.lives = this.levelManager.lives;
     this.binsFilled = 0;
 
+    this.addBackground();
+
     this.addAnimations();
 
     // Waste
@@ -59,6 +61,14 @@ export default class Main extends Scene {
     } else {
       this.startGame();
     }
+  }
+
+  addBackground() {
+    const { width, height } = this.game.config;
+    this.add
+      .image(-100, 0, objects.back.gradient)
+      .setOrigin(0, 0)
+      .setDisplaySize(width + 100, height);
   }
 
   addAnimations() {

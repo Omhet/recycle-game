@@ -43,6 +43,11 @@ export default class Boot extends Scene {
         );
       }
     }
+    // Back
+    load.image(
+      objects.back.gradient,
+      require('../assets/sprites/background/gradient.png')
+    );
     // Font
     load.bitmapFont(
       fonts.main,

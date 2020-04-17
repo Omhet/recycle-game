@@ -25,6 +25,9 @@ export const objects = {
     metal: 'metal-bin',
     plastic: 'plastic-bin',
   },
+  back: {
+    gradient: 'gradient',
+  },
 };
 
 export const animations = {
