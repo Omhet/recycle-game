@@ -1,8 +1,8 @@
 {
-  "name": "phaser-template",
+  "name": "recycle-game",
   "version": "0.0.0",
-  "description": "A template for building Phaser games.",
-  "author": "Mark <mark@remarkablemark.org>",
+  "description": "A Phaser 3 game that shows the love for recycling waste",
+  "author": "Vladimir Ivanov <https://omhet.github.io/>",
   "scripts": {
     "build": "node scripts/build",
     "clean": "rm -rf build",
@@ -12,13 +12,13 @@
     "release": "standard-version --no-verify",
     "start": "node scripts/start"
   },
-  "homepage": "https://remarkablegames.org/phaser-template/",
+  "homepage": "https://github.com/Omhet/recycle-game/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/remarkablegames/phaser-template"
+    "url": "https://github.com/Omhet/recycle-game"
   },
   "bugs": {
-    "url": "https://github.com/remarkablegames/phaser-template/issues"
+    "url": "https://github.com/Omhet/recycle-game/issues"
   },
   "devDependencies": {
     "@babel/core": "7.7.2",
