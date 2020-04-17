@@ -31,6 +31,8 @@ export const objects = {
     pavement: 'pavement',
     grass: 'grass',
     shrub: 'shrub',
+    city: 'city',
+    cityBack: 'cityBack',
   },
 };
 

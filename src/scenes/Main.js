@@ -73,6 +73,8 @@ export default class Main extends Scene {
     const floorTop = this.fillSceneContinuous(objects.back.floor, height);
     const pavementTop = this.fillScene(objects.back.pavement, floorTop);
     const grassTop = this.fillSceneContinuous(objects.back.grass, pavementTop);
+    this.fillScene(objects.back.cityBack, grassTop - 20);
+    this.fillScene(objects.back.city, grassTop);
     this.fillScene(objects.back.shrub, grassTop);
   }
 

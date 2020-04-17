@@ -64,6 +64,14 @@ export default class Boot extends Scene {
       objects.back.shrub,
       require('../assets/sprites/background/shrub.png')
     );
+    load.image(
+      objects.back.city,
+      require('../assets/sprites/background/city.png')
+    );
+    load.image(
+      objects.back.cityBack,
+      require('../assets/sprites/background/cityBack.png')
+    );
     // Font
     load.bitmapFont(
       fonts.main,
