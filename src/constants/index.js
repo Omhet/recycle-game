@@ -27,6 +27,8 @@ export const objects = {
   },
   back: {
     gradient: 'gradient',
+    floor: 'floor',
+    pavement: 'pavement',
   },
 };
 

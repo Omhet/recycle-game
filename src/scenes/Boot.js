@@ -48,6 +48,14 @@ export default class Boot extends Scene {
       objects.back.gradient,
       require('../assets/sprites/background/gradient.png')
     );
+    load.image(
+      objects.back.floor,
+      require('../assets/sprites/background/floor.png')
+    );
+    load.image(
+      objects.back.pavement,
+      require('../assets/sprites/background/pavement.png')
+    );
     // Font
     load.bitmapFont(
       fonts.main,
