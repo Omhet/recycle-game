@@ -235,6 +235,7 @@ export default class Main extends Scene {
       this.bin.hitWrong();
       this.cameras.main.shake(100, 0.01);
       this.lives--;
+      this.livesGUI.decreaseLives();
     }
 
     if (this.lives <= 0) {
@@ -290,7 +291,6 @@ export default class Main extends Scene {
 
   startNewLevel() {
     this.levelManager.levelUp(++this.binsFilled);
-    this.lives = gameOptions.lives;
     this.startWasteTimer();
   }
 

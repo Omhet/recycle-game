@@ -17,4 +17,9 @@ export default class GameOver extends GameObjects.Container {
     }
     scene.add.existing(this);
   }
+
+  decreaseLives() {
+    const live = this.lives.pop();
+    live.destroy();
+  }
 }
