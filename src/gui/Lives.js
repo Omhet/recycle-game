@@ -16,10 +16,24 @@ export default class GameOver extends GameObjects.Container {
       this.lives.push(live);
     }
     scene.add.existing(this);
+
+    this.scene = scene;
   }
 
   decreaseLives() {
     const live = this.lives.pop();
-    live.destroy();
+
+    if (this.lives.length > 1) {
+      this.scene.tweens.add({
+        targets: [live],
+        duration: 250,
+        ease: 'Quad.easeOut',
+        scale: '+=0.5',
+        yoyo: true,
+        onComplete: () => live.destroy(),
+      });
+    } else {
+      live.destroy();
+    }
   }
 }
