@@ -1,14 +1,34 @@
 import { GameObjects } from 'phaser';
-import { fonts } from '../constants';
+import { fonts, images } from '../constants';
 
-const scoreTemplate = score => `SCORE: ${score}`;
+const scoreTemplate = score => `${score}`;
 
 export default class Score extends GameObjects.BitmapText {
   constructor({ scene, text }) {
-    const { width } = scene.game.config;
-    super(scene, width / 2, 32, fonts.main, scoreTemplate(text), 42);
+    const offset = 16;
+    const icon = scene.add
+      .image(offset, offset, images.icon)
+      .setOrigin(0, 0)
+      .setDepth(1);
+    super(
+      scene,
+      icon.width + offset * 2,
+      icon.height / 2 - offset,
+      fonts.main,
+      scoreTemplate(text),
+      56
+    )
+      .setOrigin(0, 0)
+      .setDepth(1);
 
-    scene.add.existing(this).setOrigin(0.5, 0);
+    scene.add.existing(this);
+
+    this.icon = icon;
+  }
+
+  dispose() {
+    this.destroy();
+    this.icon.destroy();
   }
 
   setScore = score => {

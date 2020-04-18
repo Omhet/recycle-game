@@ -187,7 +187,7 @@ export default class Main extends Scene {
   gameOver() {
     this.wasteTimer.destroy();
     this.bin.die();
-    this.scoreText.destroy();
+    this.scoreText.dispose();
     const gameOver = new GameOver({ scene: this });
     this.input.once('pointerdown', () => {
       gameOver.destroy();

@@ -63,6 +63,7 @@ export const fonts = {
 
 export const images = {
   logo: 'logo',
+  icon: 'icon',
 };
 
 export const gameOptions = {
