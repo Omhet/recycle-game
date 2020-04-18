@@ -7,7 +7,7 @@ import {
   getAnimationName,
   getImageSize,
 } from '../utils';
-import { Score, GameOver, Lives } from '../texts';
+import { Score, GameOver, Lives } from '../gui';
 
 export default class Main extends Scene {
   constructor() {
@@ -196,10 +196,10 @@ export default class Main extends Scene {
   gameOver() {
     this.wasteTimer.destroy();
     this.bin.die();
-    this.scoreText.dispose();
-    const gameOver = new GameOver({ scene: this });
+    this.scoreGUI.dispose();
+    const gameOverGUI = new GameOver({ scene: this });
     this.input.once('pointerdown', () => {
-      gameOver.destroy();
+      gameOverGUI.destroy();
       this.bin.binImage.destroy();
       this.cameras.main.flash(350, 255, 255, 255, false, (cam, progress) => {
         if (progress === 1) {
@@ -211,7 +211,7 @@ export default class Main extends Scene {
 
   addScore() {
     this.score = 0;
-    this.scoreText = new Score({ scene: this, text: this.score });
+    this.scoreGUI = new Score({ scene: this, text: this.score });
   }
 
   handleWasteCollideWalls({ gameObjectA: waste }) {
@@ -229,7 +229,7 @@ export default class Main extends Scene {
     const typeMatch = this.bin.checkIfTypeMatch(waste.type);
 
     if (typeMatch) {
-      this.scoreText.setScore(++this.score);
+      this.scoreGUI.setScore(++this.score);
       this.bin.hitRight();
     } else {
       this.bin.hitWrong();
