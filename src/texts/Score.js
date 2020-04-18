@@ -17,6 +17,7 @@ export default class Score extends GameObjects.Text {
       scoreTemplate(text),
       {
         fontSize: 80,
+        fontStyle: 'bold',
         shadow: {
           offsetX: 3,
           offsetY: 1,
