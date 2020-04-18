@@ -64,8 +64,10 @@ export const fonts = {
 export const images = {
   logo: 'logo',
   icon: 'icon',
+  heart: 'heart',
 };
 
 export const gameOptions = {
   showStartScreen: true,
+  lives: 3,
 };

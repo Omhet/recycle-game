@@ -1,8 +1,13 @@
 import { scenes, gameOptions, images, objects, animations } from '../constants';
 import Phaser, { Scene } from 'phaser';
 import { WasteFactory, BinFactory } from '../sprites';
-import { isIntersecting, LevelManager, getAnimationName } from '../utils';
-import { Score, GameOver } from '../texts';
+import {
+  isIntersecting,
+  LevelManager,
+  getAnimationName,
+  getImageSize,
+} from '../utils';
+import { Score, GameOver, Lives } from '../texts';
 
 export default class Main extends Scene {
   constructor() {
@@ -11,7 +16,7 @@ export default class Main extends Scene {
 
   create() {
     const { width, height } = this.game.config;
-    const { showStartScreen } = gameOptions;
+    const { showStartScreen, lives } = gameOptions;
 
     // World
     const wallOffset = 200;
@@ -24,7 +29,7 @@ export default class Main extends Scene {
 
     // General
     this.levelManager = new LevelManager();
-    this.lives = this.levelManager.lives;
+    this.lives = lives;
     this.binsFilled = 0;
 
     this.addBackground();
@@ -126,7 +131,7 @@ export default class Main extends Scene {
 
   fillSceneContinuous(key, y) {
     const { width } = this.game.config;
-    const { height: imageHeight } = this.getImageSize(key);
+    const { height: imageHeight } = getImageSize.call(this, key);
     this.add
       .image(-100, y, key)
       .setOrigin(0, 1)
@@ -137,7 +142,10 @@ export default class Main extends Scene {
 
   fillScene(key, y) {
     const { width } = this.game.config;
-    const { width: imageWidth, height: imageHeight } = this.getImageSize(key);
+    const { width: imageWidth, height: imageHeight } = getImageSize.call(
+      this,
+      key
+    );
     const images = Math.ceil(width / imageWidth);
     const offset = Math.floor(Math.abs(width - images * imageWidth) / 2);
     for (let i = 0; i < images; i++) {
@@ -179,6 +187,7 @@ export default class Main extends Scene {
     gameOptions.showStartScreen = false;
     this.startWasteTimer();
     this.addScore();
+    this.livesGUI = new Lives({ scene: this, lives: this.lives });
     if (this.logo) {
       this.logo.destroy();
     }
@@ -281,7 +290,7 @@ export default class Main extends Scene {
 
   startNewLevel() {
     this.levelManager.levelUp(++this.binsFilled);
-    this.lives = this.levelManager.lives;
+    this.lives = gameOptions.lives;
     this.startWasteTimer();
   }
 

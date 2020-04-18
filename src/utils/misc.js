@@ -11,3 +11,9 @@ export function isIntersecting(obj, { x, y }, padding) {
 export function getAnimationName(bin, animationType) {
   return `${bin}-${animationType}`;
 }
+
+export function getImageSize(key) {
+  const tex = this.textures.get(key);
+  const { width, height } = tex.getSourceImage();
+  return { width, height };
+}
