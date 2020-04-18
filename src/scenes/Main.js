@@ -48,7 +48,10 @@ export default class Main extends Scene {
     swipe.on('swipe', this.handleSwipe, this);
 
     if (showStartScreen) {
-      this.logo = this.add.image(width / 2, 128, images.logo);
+      const logoScale = width <= 960 ? 0.85 : 1;
+      this.logo = this.add
+        .image(width / 2, height / 4, images.logo)
+        .setScale(logoScale);
       const waste = this.createWasteOfBinType();
       waste
         .setPosition(width / 2, height / 2)
