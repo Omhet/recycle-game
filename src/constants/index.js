@@ -72,6 +72,7 @@ export const sounds = {
   puke: 'puke',
   joy: 'joy',
   pop: 'pop',
+  whoosh: 'whoosh',
 };
 
 export const gameOptions = {

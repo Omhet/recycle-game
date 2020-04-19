@@ -39,7 +39,8 @@ export default class Main extends Scene {
     this.lives = lives;
     this.binsFilled = 0;
 
-    this.music = this.sound.add(sounds.main, { loop: true, volume: 0.2 });
+    this.music = this.sound.add(sounds.main, { loop: true, volume: 0.1 });
+    this.whooshSound = this.sound.add(sounds.whoosh);
 
     this.addBackground();
     this.addAnimations();
@@ -378,6 +379,8 @@ export default class Main extends Scene {
     const vel = 20;
     this.wastes.forEach(waste => {
       if (isIntersecting(waste, { x, y }, 50)) {
+        const detune = Phaser.Math.Between(-300, 300);
+        this.whooshSound.play({ detune });
         let velX = left ? -vel : right ? vel : 0;
         let velY = up ? -vel : down ? vel : 0;
         waste.setVelocity(velX, velY);
