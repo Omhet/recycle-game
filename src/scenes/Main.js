@@ -14,6 +14,7 @@ import {
   getAnimationName,
   getImageSize,
 } from '../utils';
+import { Life } from '../sprites';
 import { Score, GameOver, Lives } from '../gui';
 
 export default class Main extends Scene {
@@ -195,6 +196,7 @@ export default class Main extends Scene {
     this.music.play();
     gameOptions.showStartScreen = false;
     this.startWasteTimer();
+    this.startLivesTimer();
     this.addScore();
     this.livesGUI = new Lives({ scene: this, lives: this.lives });
     if (this.logo) {
@@ -206,6 +208,7 @@ export default class Main extends Scene {
     this.music.stop();
     this.sound.play(sounds.stop, { volume: 0.2 });
     this.wasteTimer.destroy();
+    this.livesTimer.destroy();
     this.bin.die();
     this.scoreGUI.dispose();
     const gameOverGUI = new GameOver({ scene: this });
@@ -262,6 +265,7 @@ export default class Main extends Scene {
     const { width } = this.game.config;
 
     this.wasteTimer.destroy();
+    this.livesTimer.destroy();
     this.moveWasteAway();
 
     this.tweens.add({
@@ -313,6 +317,7 @@ export default class Main extends Scene {
   startNewLevel() {
     this.levelManager.levelUp(++this.binsFilled);
     this.startWasteTimer();
+    this.startLivesTimer();
   }
 
   diposeWaste(waste) {
@@ -332,6 +337,36 @@ export default class Main extends Scene {
       callbackScope: this,
       loop: true,
     });
+  }
+
+  startLivesTimer() {
+    if (this.livesTimer) {
+      this.livesTimer.destroy();
+    }
+
+    this.livesTimer = this.time.addEvent({
+      delay: this.levelManager.livesThrowDelay,
+      callback: this.throwLife,
+      callbackScope: this,
+      loop: true,
+    });
+  }
+
+  throwLife() {
+    if (this.lives < gameOptions.lives) {
+      const life = new Life({ scene: this });
+      life.throw();
+      this.matterCollision.addOnCollideStart({
+        objectA: life,
+        objectB: [
+          this.worldBounds.walls.left,
+          this.worldBounds.walls.right,
+          this.worldBounds.walls.bottom,
+        ],
+        callback: () => life.destroy(),
+        context: this,
+      });
+    }
   }
 
   createWasteOfBinType() {
@@ -382,7 +417,7 @@ export default class Main extends Scene {
   throwWaste() {
     if (this.wastes.length < this.levelManager.numberOfWastes) {
       const waste = this.createRandomWaste();
-      waste.throw();
+      waste.throwWithRandomAngle();
     }
   }
 

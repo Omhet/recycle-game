@@ -21,6 +21,10 @@ const commonMethods = {
   },
   throw() {
     const { velX, velY } = this.getRandomVelocity();
+    this.setVisible(true).setVelocity(velX, velY);
+  },
+  throwWithRandomAngle() {
+    const { velX, velY } = this.getRandomVelocity();
     const angleVel = this.getRandomAngleVelocity();
     this.setVisible(true)
       .setAngularVelocity(angleVel)

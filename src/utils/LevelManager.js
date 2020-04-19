@@ -3,6 +3,7 @@ export default class LevelManager {
     this.level = 1;
     this.wasteThrowDelay = 1000;
     this.numberOfWastes = 1;
+    this.livesThrowDelay = 4000;
     this.binsThatLevelUp = [1, 3, 6, 9];
     this.fillLimit = 2;
     this.wasteProbability = 50;
