@@ -39,8 +39,9 @@ export default class Main extends Scene {
     this.lives = lives;
     this.binsFilled = 0;
 
-    this.addBackground();
+    this.music = this.sound.add(sounds.main, { loop: true, volume: 0.2 });
 
+    this.addBackground();
     this.addAnimations();
 
     // Waste
@@ -191,6 +192,7 @@ export default class Main extends Scene {
   }
 
   startGame() {
+    this.music.play();
     gameOptions.showStartScreen = false;
     this.startWasteTimer();
     this.addScore();
@@ -201,6 +203,7 @@ export default class Main extends Scene {
   }
 
   gameOver() {
+    this.music.stop();
     this.wasteTimer.destroy();
     this.bin.die();
     this.scoreGUI.dispose();

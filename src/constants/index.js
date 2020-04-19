@@ -68,6 +68,7 @@ export const images = {
 };
 
 export const sounds = {
+  main: 'main',
   puke: 'puke',
   joy: 'joy',
   pop: 'pop',
