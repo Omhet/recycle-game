@@ -362,7 +362,8 @@ export default class Main extends Scene {
       objectA: waste,
       objectB: this.wastes,
       callback: () => {
-        this.sound.play(sounds.pop);
+        const detune = Phaser.Math.Between(-300, 300);
+        this.sound.play(sounds.pop, { detune });
       },
       context: this,
     });
