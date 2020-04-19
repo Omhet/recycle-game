@@ -101,6 +101,7 @@ export default class Boot extends Scene {
     load.audio(sounds.joy, require('../assets/sounds/joy.wav'));
     load.audio(sounds.pop, require('../assets/sounds/pop.wav'));
     load.audio(sounds.whoosh, require('../assets/sounds/whoosh.wav'));
+    load.audio(sounds.stop, require('../assets/sounds/stop.wav'));
   }
 
   create() {
