@@ -9,7 +9,7 @@ export default class Bin extends Physics.Matter.Sprite {
 
     super(scene.matter.world, x, height - size);
 
-    this.setDisplaySize(size, 10)
+    this.setDisplaySize(size * 0.8, 10)
       .setSensor(true)
       .setStatic(true);
 
