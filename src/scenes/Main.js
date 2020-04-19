@@ -50,7 +50,7 @@ export default class Main extends Scene {
 
     // Bin
     this.binFactory = new BinFactory({ scene: this });
-    this.bin = this.binFactory.getRandomBin(width / 2);
+    this.bin = this.binFactory.getRandomBin({ x: width / 2 });
 
     // Controls
     const swipe = this.gestures.add.swipe({
@@ -286,7 +286,10 @@ export default class Main extends Scene {
     }
     function oldBinMoved() {
       this.bin.destroy();
-      this.bin = this.binFactory.getRandomBin(width + this.bin.binImage.width);
+      this.bin = this.binFactory.getRandomBinExceptOf({
+        type: this.bin.type,
+        x: width + this.bin.binImage.width,
+      });
 
       this.tweens.add({
         targets: [this.bin, this.bin.binImage],
