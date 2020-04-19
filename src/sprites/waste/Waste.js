@@ -13,7 +13,6 @@ export default class Waste extends Physics.Matter.Sprite {
     const x = Phaser.Math.Between(this.width / 2, width - this.width);
     const y = height;
     this.setPosition(x, y);
-
     this.type = type;
 
     addCommonMethods(this);

@@ -356,6 +356,12 @@ export default class Main extends Scene {
     if (this.lives < gameOptions.lives) {
       const life = new Life({ scene: this });
       life.throw();
+      life.once('pointerdown', () => {
+        this.lives++;
+        this.lives = Math.max(this.lives, gameOptions.lives);
+        this.livesGUI.increaseLives();
+        life.destroy();
+      });
       this.matterCollision.addOnCollideStart({
         objectA: life,
         objectB: [

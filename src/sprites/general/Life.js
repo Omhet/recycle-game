@@ -11,6 +11,7 @@ export default class Life extends Physics.Matter.Sprite {
     scene.add.existing(this);
     this.setBounce(0.95)
       .setVisible(false)
+      .setInteractive()
       .setSensor(true);
 
     const x = Phaser.Math.Between(this.width / 2, width - this.width);
