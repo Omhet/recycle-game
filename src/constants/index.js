@@ -67,6 +67,12 @@ export const images = {
   heart: 'heart',
 };
 
+export const sounds = {
+  puke: 'puke',
+  joy: 'joy',
+  pop: 'pop',
+};
+
 export const gameOptions = {
   showStartScreen: true,
   lives: 3,

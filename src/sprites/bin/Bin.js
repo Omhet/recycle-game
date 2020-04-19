@@ -1,5 +1,5 @@
 import { Physics } from 'phaser';
-import { animations } from '../../constants';
+import { animations, sounds } from '../../constants';
 import { getAnimationName } from '../../utils';
 
 export default class Bin extends Physics.Matter.Sprite {
@@ -47,10 +47,12 @@ export default class Bin extends Physics.Matter.Sprite {
   }
 
   hitWrong() {
+    this.scene.sound.play(sounds.puke);
     this.binImage.anims.play(this.animPuke);
   }
 
   hitRight() {
+    this.scene.sound.play(sounds.joy);
     this.binImage.anims.play(this.animJoy);
     this.increaseFill();
   }

@@ -1,4 +1,11 @@
-import { scenes, gameOptions, images, objects, animations } from '../constants';
+import {
+  scenes,
+  gameOptions,
+  images,
+  objects,
+  animations,
+  sounds,
+} from '../constants';
 import Phaser, { Scene } from 'phaser';
 import { WasteFactory, BinFactory } from '../sprites';
 import {
@@ -345,6 +352,14 @@ export default class Main extends Scene {
       objectA: waste,
       objectB: [this.bin],
       callback: this.handleWasteCollideBin,
+      context: this,
+    });
+    this.matterCollision.addOnCollideStart({
+      objectA: waste,
+      objectB: this.wastes,
+      callback: () => {
+        this.sound.play(sounds.pop);
+      },
       context: this,
     });
   }
