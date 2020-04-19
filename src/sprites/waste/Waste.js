@@ -1,4 +1,5 @@
 import Phaser, { Physics } from 'phaser';
+import { addCommonMethods } from '../helpers';
 
 export default class Waste extends Physics.Matter.Sprite {
   constructor({ scene, key, type }) {
@@ -14,34 +15,7 @@ export default class Waste extends Physics.Matter.Sprite {
     this.setPosition(x, y);
 
     this.type = type;
-  }
 
-  dispose() {
-    this.destroy();
-    delete this;
-  }
-
-  getRandomVelocity() {
-    const { width } = this.scene.game.config;
-    let velX = Phaser.Math.Between(0, 8);
-    velX = this.x < width / 2 ? velX : -velX;
-    const velY = Phaser.Math.Between(-25, -30);
-
-    return { velX, velY };
-  }
-
-  getRandomAngleVelocity() {
-    const dir = Phaser.Math.Between(0, 1) === 1 ? -1 : 1;
-    const vel = Phaser.Math.RND.realInRange(0.01, 0.06);
-
-    return vel * dir;
-  }
-
-  throw() {
-    const { velX, velY } = this.getRandomVelocity();
-    const angleVel = this.getRandomAngleVelocity();
-    this.setVisible(true)
-      .setAngularVelocity(angleVel)
-      .setVelocity(velX, velY);
+    addCommonMethods(this);
   }
 }
