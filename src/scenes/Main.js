@@ -264,30 +264,37 @@ export default class Main extends Scene {
     this.wasteTimer.destroy();
     this.moveWasteAway();
 
-    this.moveOldBinTween = this.tweens.add({
+    this.tweens.add({
       targets: [this.bin, this.bin.binImage],
-      x: -500,
-      duration: 500,
+      y: '-=300',
+      angle: `+=${Phaser.Math.Between(0, 1) === 0 ? 15 : -15}`,
+      duration: 300,
       callbackScope: this,
-      onComplete: oldBinMoved,
+      yoyo: true,
+      ease: 'Cubic.easeOut',
+      onComplete: oldBinJumped,
     });
+    function oldBinJumped() {
+      this.tweens.add({
+        targets: [this.bin, this.bin.binImage],
+        x: -this.bin.binImage.width,
+        duration: 500,
+        ease: 'Cubic.easeIn',
+        callbackScope: this,
+        onComplete: oldBinMoved,
+      });
+    }
     function oldBinMoved() {
       this.bin.destroy();
-      this.bin = this.binFactory.getRandomBin(width);
+      this.bin = this.binFactory.getRandomBin(width + this.bin.binImage.width);
 
-      this.moveNewBinTween = this.tweens.add({
+      this.tweens.add({
         targets: [this.bin, this.bin.binImage],
-        props: {
-          x: {
-            value: {
-              getEnd: () => {
-                return width / 2;
-              },
-            },
-          },
-        },
+        x: width / 2,
         duration: 500,
+        delay: 150,
         callbackScope: this,
+        ease: 'Cubic.easeOut',
         onComplete: this.startNewLevel,
       });
     }
