@@ -192,7 +192,7 @@ export default class Main extends Scene {
   }
 
   startGame() {
-    // this.music.play();
+    this.music.play();
     gameOptions.showStartScreen = false;
     this.startWasteTimer();
     this.addScore();
