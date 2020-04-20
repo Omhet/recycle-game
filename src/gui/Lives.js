@@ -4,31 +4,23 @@ import { getImageSize } from '../utils';
 
 export default class GameOver extends GameObjects.Container {
   constructor({ scene, lives }) {
+    const { width } = scene.game.config;
+    const { width: heartWidth } = getImageSize.call(scene, images.heart);
     super(scene, 0, 0);
-    this.livesCount = lives;
     this.lives = [];
-    this.drawLives();
-    scene.add.existing(this);
-
-    this.scene = scene;
-  }
-
-  drawLives() {
-    const { width } = this.scene.game.config;
-    const { width: heartWidth } = getImageSize.call(this.scene, images.heart);
-
-    for (let i = 0; i < this.livesCount; i++) {
-      const live = this.scene.add
+    for (let i = 0; i < lives; i++) {
+      const live = scene.add
         .image(width - heartWidth * i, 32, images.heart)
         .setOrigin(1, 0)
         .setDepth(1);
       this.lives.push(live);
     }
+    scene.add.existing(this);
+
+    this.scene = scene;
   }
 
   decreaseLives() {
-    this.livesCount--;
-
     const live = this.lives.pop();
 
     if (this.lives.length > 1) {
@@ -43,10 +35,5 @@ export default class GameOver extends GameObjects.Container {
     } else {
       live.destroy();
     }
-  }
-
-  increaseLives() {
-    this.livesCount++;
-    this.drawLives();
   }
 }
