@@ -192,7 +192,7 @@ export default class Main extends Scene {
   }
 
   startGame() {
-    this.music.play();
+    // this.music.play();
     gameOptions.showStartScreen = false;
     this.startWasteTimer();
     this.addScore();
@@ -263,6 +263,7 @@ export default class Main extends Scene {
 
     this.wasteTimer.destroy();
     this.moveWasteAway();
+    this.sound.play(sounds.ding, { volume: 0.8 });
 
     this.tweens.add({
       targets: [this.bin, this.bin.binImage],
