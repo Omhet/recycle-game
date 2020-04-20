@@ -275,6 +275,7 @@ export default class Main extends Scene {
       onComplete: oldBinJumped,
     });
     function oldBinJumped() {
+      this.sound.play(sounds.whoosh, { rate: 0.5 });
       this.tweens.add({
         targets: [this.bin, this.bin.binImage],
         x: -this.bin.binImage.width,
@@ -285,6 +286,7 @@ export default class Main extends Scene {
       });
     }
     function oldBinMoved() {
+      this.sound.play(sounds.whoosh, { rate: 0.55 });
       this.bin.destroy();
       this.bin = this.binFactory.getRandomBinExceptOf({
         type: this.bin.type,
