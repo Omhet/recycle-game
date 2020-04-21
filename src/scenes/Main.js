@@ -38,6 +38,8 @@ export default class Main extends Scene {
     this.levelManager = new LevelManager();
     this.lives = lives;
     this.binsFilled = 0;
+    this.menuGroup = this.add.group();
+    // this.guiGroup = this.add.group();
 
     this.music = this.sound.add(sounds.main, { loop: true, volume: 0.1 });
 
@@ -50,7 +52,7 @@ export default class Main extends Scene {
 
     // Bin
     this.binFactory = new BinFactory({ scene: this });
-    this.bin = this.binFactory.getRandomBin({ x: width / 2 });
+    // this.bin = this.binFactory.getRandomBin({ x: width / 2 });
 
     // Controls
     const swipe = this.gestures.add.swipe({
@@ -61,22 +63,41 @@ export default class Main extends Scene {
     swipe.on('swipe', this.handleSwipe, this);
 
     if (showStartScreen) {
-      const logoScale = width <= 960 ? 0.85 : 1;
-      this.logo = this.add
-        .image(width / 2, height / 4, images.logo)
-        .setScale(logoScale);
-      const waste = this.createWasteOfBinType();
-      waste
-        .setPosition(width / 2, height / 2)
-        .setVisible(true)
-        .setStatic(true);
-      this.input.once('pointerdown', () => {
-        waste.setStatic(false);
-        this.startGame();
-      });
+      this.showStartScreen();
     } else {
       this.startGame();
     }
+  }
+
+  showStartScreen() {
+    const { width, height } = this.game.config;
+
+    const logoScale = width <= 960 ? 0.85 : 1;
+    const logo = this.add
+      .image(width / 2, height / 4, images.logo)
+      .setScale(logoScale);
+    this.menuGroup.add(logo);
+
+    const play = this.add
+      .image(width / 2, height - height / 4, images.play)
+      .setOrigin(0.5, 1)
+      .setInteractive();
+    this.tweens.add({
+      targets: play,
+      scale: '+=0.05',
+      repeat: -1,
+      duration: 600,
+      repeatDelay: 3000,
+      ease: 'Back.easeOut',
+      yoyo: true,
+    });
+    this.menuGroup.add(play);
+
+    play.once('pointerdown', () => {
+      this.menuGroup.toggleVisible();
+      this.menuGroup.active = false;
+      this.startGame();
+    });
   }
 
   addBackground() {
@@ -197,9 +218,6 @@ export default class Main extends Scene {
     this.startWasteTimer();
     this.addScore();
     this.livesGUI = new Lives({ scene: this, lives: this.lives });
-    if (this.logo) {
-      this.logo.destroy();
-    }
   }
 
   gameOver() {

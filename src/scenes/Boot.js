@@ -93,6 +93,7 @@ export default class Boot extends Scene {
     );
     // Misc
     load.image(images.logo, require('../assets/sprites/logo.png'));
+    load.image(images.play, require('../assets/sprites/play.png'));
     load.image(images.icon, require('../assets/sprites/icon.png'));
     load.image(images.heart, require('../assets/sprites/heart.png'));
     // Sounds
