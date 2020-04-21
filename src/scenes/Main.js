@@ -63,7 +63,7 @@ export default class Main extends Scene {
     if (showStartScreen) {
       this.showStartScreen();
     } else {
-      this.startGame();
+      this.prepareToStart();
     }
   }
 
