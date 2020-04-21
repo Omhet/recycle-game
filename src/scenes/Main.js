@@ -52,7 +52,6 @@ export default class Main extends Scene {
 
     // Bin
     this.binFactory = new BinFactory({ scene: this });
-    // this.bin = this.binFactory.getRandomBin({ x: width / 2 });
 
     // Controls
     const swipe = this.gestures.add.swipe({
@@ -97,6 +96,36 @@ export default class Main extends Scene {
       this.menuGroup.toggleVisible();
       this.menuGroup.active = false;
       this.startGame();
+    });
+  }
+
+  startGame() {
+    const { width } = this.game.config;
+
+    this.bin = this.binFactory.getRandomBin({ x: width / 2 });
+
+    this.music.play();
+    gameOptions.showStartScreen = false;
+    this.startWasteTimer();
+    this.addScore();
+    this.livesGUI = new Lives({ scene: this, lives: this.lives });
+  }
+
+  gameOver() {
+    this.music.stop();
+    this.sound.play(sounds.stop, { volume: 0.2 });
+    this.wasteTimer.destroy();
+    this.bin.die();
+    this.scoreGUI.dispose();
+    const gameOverGUI = new GameOver({ scene: this });
+    this.input.once('pointerdown', () => {
+      gameOverGUI.destroy();
+      this.bin.binImage.destroy();
+      this.cameras.main.flash(350, 255, 255, 255, false, (cam, progress) => {
+        if (progress === 1) {
+          this.scene.restart();
+        }
+      });
     });
   }
 
@@ -210,32 +239,6 @@ export default class Main extends Scene {
         repeat,
       });
     }
-  }
-
-  startGame() {
-    this.music.play();
-    gameOptions.showStartScreen = false;
-    this.startWasteTimer();
-    this.addScore();
-    this.livesGUI = new Lives({ scene: this, lives: this.lives });
-  }
-
-  gameOver() {
-    this.music.stop();
-    this.sound.play(sounds.stop, { volume: 0.2 });
-    this.wasteTimer.destroy();
-    this.bin.die();
-    this.scoreGUI.dispose();
-    const gameOverGUI = new GameOver({ scene: this });
-    this.input.once('pointerdown', () => {
-      gameOverGUI.destroy();
-      this.bin.binImage.destroy();
-      this.cameras.main.flash(350, 255, 255, 255, false, (cam, progress) => {
-        if (progress === 1) {
-          this.scene.restart();
-        }
-      });
-    });
   }
 
   addScore() {
