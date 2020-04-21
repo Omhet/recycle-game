@@ -95,15 +95,26 @@ export default class Main extends Scene {
     play.once('pointerdown', () => {
       this.menuGroup.toggleVisible();
       this.menuGroup.active = false;
-      this.startGame();
+      this.prepareToStart();
+    });
+  }
+
+  prepareToStart() {
+    const { width } = this.game.config;
+
+    this.bin = this.binFactory.getRandomBin({ x: width });
+    this.sound.play(sounds.whoosh, { rate: 0.5 });
+    this.tweens.add({
+      targets: [this.bin, this.bin.binImage],
+      x: width / 2,
+      duration: 500,
+      ease: 'Cubic.easeOut',
+      callbackScope: this,
+      onComplete: this.startGame,
     });
   }
 
   startGame() {
-    const { width } = this.game.config;
-
-    this.bin = this.binFactory.getRandomBin({ x: width / 2 });
-
     this.music.play();
     gameOptions.showStartScreen = false;
     this.startWasteTimer();
