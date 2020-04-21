@@ -39,7 +39,6 @@ export default class Main extends Scene {
     this.lives = lives;
     this.binsFilled = 0;
     this.menuGroup = this.add.group();
-    // this.guiGroup = this.add.group();
 
     this.music = this.sound.add(sounds.main, { loop: true, volume: 0.1 });
 
