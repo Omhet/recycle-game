@@ -52,7 +52,7 @@ export default class Bin extends Physics.Matter.Sprite {
   }
 
   hitRight() {
-    this.scene.sound.play(sounds.joy);
+    this.scene.sound.play(sounds.joy, { volume: 0.2 });
     this.binImage.anims.play(this.animJoy);
     this.increaseFill();
   }
