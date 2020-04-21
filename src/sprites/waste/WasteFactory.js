@@ -7,7 +7,8 @@ export default class WasteFactory {
     this.wasteTypes = [General, Plastic, Glass, Metal, Paper];
   }
   getRandomWaste({ neededType, probability } = {}) {
-    const shouldGiveNeededType = Phaser.Math.Between(0, 100) >= probability;
+    const shouldGiveNeededType =
+      Phaser.Math.Between(0, 100) >= 100 - probability;
     const type =
       neededType && shouldGiveNeededType
         ? this.getOfType(neededType)
