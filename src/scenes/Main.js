@@ -93,14 +93,24 @@ export default class Main extends Scene {
     this.menuGroup.add(play);
 
     play.once('pointerdown', () => {
-      this.menuGroup.toggleVisible();
-      this.menuGroup.active = false;
       this.prepareToStart();
     });
   }
 
   prepareToStart() {
-    const { width } = this.game.config;
+    const { width, height } = this.game.config;
+
+    this.tweens.add({
+      targets: this.menuGroup.getChildren(),
+      y: -height,
+      duration: 500,
+      ease: 'Cubic.easeIn',
+      callbackScope: this,
+      onComplete: () => {
+        this.menuGroup.toggleVisible();
+        this.menuGroup.active = false;
+      },
+    });
 
     this.bin = this.binFactory.getRandomBin({ x: width });
     this.sound.play(sounds.whoosh, { rate: 0.5 });
