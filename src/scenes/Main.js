@@ -14,7 +14,7 @@ import {
   getAnimationName,
   getImageSize,
 } from '../utils';
-import { Score, GameOver, Lives } from '../gui';
+import { Score, GameOver, Lives, MaxScore } from '../gui';
 
 export default class Main extends Scene {
   constructor() {
@@ -77,8 +77,8 @@ export default class Main extends Scene {
     this.menuGroup.add(logo);
 
     const play = this.add
-      .image(width / 2, height - height / 4, images.play)
-      .setOrigin(0.5, 1)
+      .image(width / 2, height / 2, images.play)
+      .setOrigin(0.5, 0.5)
       .setInteractive();
     this.tweens.add({
       targets: play,
@@ -90,6 +90,10 @@ export default class Main extends Scene {
       yoyo: true,
     });
     this.menuGroup.add(play);
+
+    const maxScore = localStorage.getItem('maxScore') || 0;
+    const maxScoreGUI = new MaxScore({ scene: this, maxScore });
+    this.menuGroup.addMultiple(maxScoreGUI.getChildren());
 
     play.once('pointerdown', () => {
       this.prepareToStart();
@@ -138,6 +142,9 @@ export default class Main extends Scene {
     this.bin.die();
     this.scoreGUI.toggleVisible();
     const gameOverGUI = new GameOver({ scene: this });
+    const prevMaxScore = localStorage.getItem('maxScore') || 0;
+    const maxScore = Math.max(prevMaxScore, this.score);
+    localStorage.setItem('maxScore', maxScore);
     this.input.once('pointerdown', () => {
       gameOverGUI.destroy();
       this.bin.binImage.destroy();
