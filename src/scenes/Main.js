@@ -145,6 +145,7 @@ export default class Main extends Scene {
     const gameOverGUI = new GameOver({ scene: this });
     const prevMaxScore = localStorage.getItem('maxScore') || 0;
     const maxScore = Math.max(prevMaxScore, this.score);
+    new MaxScore({ scene: this, maxScore });
     localStorage.setItem('maxScore', maxScore);
     this.input.once('pointerdown', () => {
       gameOverGUI.destroy();
