@@ -136,7 +136,7 @@ export default class Main extends Scene {
     this.sound.play(sounds.stop, { volume: 0.2 });
     this.wasteTimer.destroy();
     this.bin.die();
-    this.scoreGUI.dispose();
+    this.scoreGUI.toggleVisible();
     const gameOverGUI = new GameOver({ scene: this });
     this.input.once('pointerdown', () => {
       gameOverGUI.destroy();
@@ -263,7 +263,7 @@ export default class Main extends Scene {
 
   addScore() {
     this.score = 0;
-    this.scoreGUI = new Score({ scene: this, text: this.score });
+    this.scoreGUI = new Score({ scene: this, score: this.score });
   }
 
   handleWasteCollideWalls({ gameObjectA: waste }) {

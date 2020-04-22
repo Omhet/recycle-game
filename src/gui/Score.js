@@ -1,33 +1,26 @@
 import { GameObjects } from 'phaser';
+import Text from './Text';
 import { images } from '../constants';
 
-export default class Score extends GameObjects.Text {
-  constructor({ scene, text }) {
+export default class Score extends GameObjects.Group {
+  constructor({ scene, score }) {
     const offset = 16;
     const icon = scene.add.image(offset, offset, images.icon).setDepth(1);
     icon.setPosition(offset + icon.width / 2, offset + icon.height / 2);
-    super(
+    const text = new Text({
       scene,
-      icon.width + offset * 2,
-      icon.height / 2 - offset * 1.5,
-      text,
-      {
-        fontSize: 80,
-        fontStyle: 'bold',
-        shadow: {
-          offsetX: 3,
-          offsetY: 1,
-          color: '#6ea2d0',
-          fill: true,
-        },
-      }
-    )
-      .setOrigin(0, 0)
-      .setDepth(1);
+      text: score,
+      x: icon.width + offset * 2,
+      y: icon.height / 2 - offset * 1.5,
+      fontSize: 80,
+    });
+    super(scene, [text, icon]);
+    text.setOrigin(0, 0).setDepth(1);
 
     scene.add.existing(this);
 
     this.icon = icon;
+    this.text = text;
 
     this.iconTween = scene.tweens.add({
       targets: [this.icon],
@@ -45,13 +38,8 @@ export default class Score extends GameObjects.Text {
     });
   }
 
-  dispose() {
-    this.destroy();
-    this.icon.destroy();
-  }
-
   setScore = score => {
     this.iconTween.restart();
-    this.setText(score);
+    this.text.setText(score);
   };
 }
