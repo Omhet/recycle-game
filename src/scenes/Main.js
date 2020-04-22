@@ -54,8 +54,8 @@ export default class Main extends Scene {
 
     // Controls
     const swipe = this.gestures.add.swipe({
-      threshold: 1,
-      velocityThreshold: 1,
+      threshold: 10,
+      velocityThreshold: 100,
       direction: '8dir',
     });
     swipe.on('swipe', this.handleSwipe, this);
