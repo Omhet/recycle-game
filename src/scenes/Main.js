@@ -73,11 +73,12 @@ export default class Main extends Scene {
     const logoScale = width <= 960 ? 0.85 : 1;
     const logo = this.add
       .image(width / 2, height / 4, images.logo)
-      .setScale(logoScale);
+      .setScale(logoScale)
+      .setOrigin(0.5, 0);
     this.menuGroup.add(logo);
 
     const play = this.add
-      .image(width / 2, height / 2, images.play)
+      .image(width / 2, height - height / 3, images.play)
       .setOrigin(0.5, 0.5)
       .setInteractive();
     this.tweens.add({
