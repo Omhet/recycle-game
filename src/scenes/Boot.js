@@ -97,7 +97,7 @@ export default class Boot extends Scene {
     load.image(images.icon, require('../assets/sprites/icon.png'));
     load.image(images.heart, require('../assets/sprites/heart.png'));
     // Sounds
-    load.audio(sounds.main, require('../assets/sounds/main.wav'));
+    load.audio(sounds.main, require('../assets/sounds/main.mp3'));
     load.audio(sounds.puke, require('../assets/sounds/puke.wav'));
     load.audio(sounds.joy, require('../assets/sounds/joy.wav'));
     load.audio(sounds.pop, require('../assets/sounds/pop.wav'));

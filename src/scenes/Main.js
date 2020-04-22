@@ -40,7 +40,7 @@ export default class Main extends Scene {
     this.binsFilled = 0;
     this.menuGroup = this.add.group();
 
-    this.music = this.sound.add(sounds.main, { loop: true, volume: 0.1 });
+    this.music = this.sound.add(sounds.main, { loop: true, volume: 0.3 });
 
     this.addBackground();
     this.addAnimations();
