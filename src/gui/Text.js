@@ -1,6 +1,6 @@
 import { GameObjects } from 'phaser';
 
-export default class GameOver extends GameObjects.Text {
+export default class Text extends GameObjects.Text {
   constructor({ scene, text, x, y, fontSize }) {
     super(scene, x, y, text, {
       align: 'center',

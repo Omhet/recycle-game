@@ -14,7 +14,7 @@ import {
   getAnimationName,
   getImageSize,
 } from '../utils';
-import { Score, GameOver, Lives, MaxScore } from '../gui';
+import { Score, GameOver, Lives, MaxScore, Text } from '../gui';
 
 export default class Main extends Scene {
   constructor() {
@@ -72,13 +72,13 @@ export default class Main extends Scene {
 
     const logoScale = width <= 960 ? 0.85 : 1;
     const logo = this.add
-      .image(width / 2, height / 4, images.logo)
+      .image(width / 2, height / 3, images.logo)
       .setScale(logoScale)
-      .setOrigin(0.5, 0);
+      .setOrigin(0.5, 1);
     this.menuGroup.add(logo);
 
     const play = this.add
-      .image(width / 2, height - height / 3, images.play)
+      .image(width / 2, logo.y + logo.height * 1.5, images.play)
       .setOrigin(0.5, 0.5)
       .setInteractive();
     this.tweens.add({
@@ -95,6 +95,15 @@ export default class Main extends Scene {
     const maxScore = localStorage.getItem('maxScore') || 0;
     const maxScoreGUI = new MaxScore({ scene: this, maxScore });
     this.menuGroup.addMultiple(maxScoreGUI.getChildren());
+
+    const moto = new Text({
+      scene: this,
+      text: 'No future without it',
+      x: width / 2,
+      y: height,
+      fontSize: 56,
+    }).setOrigin(0.5, 1);
+    this.menuGroup.add(moto);
 
     play.once('pointerdown', () => {
       this.prepareToStart();
