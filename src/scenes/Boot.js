@@ -17,7 +17,9 @@ export default class Boot extends Scene {
 
   preload() {
     const { width, height } = this.game.config;
-    const boxWidth = width / 2;
+    const div = width < 900 ? 1.3 : 2;
+    const fontSize = width < 900 ? 52 : 56;
+    const boxWidth = width / div;
     const boxHeight = 80;
     const boxX = width / 2 - boxWidth / 2;
     const boxY = height / 2;
@@ -27,14 +29,14 @@ export default class Boot extends Scene {
       x: boxX,
       y: boxY - barOffset,
       text: 'Loading...',
-      fontSize: 56,
+      fontSize,
     }).setOrigin(0, 1);
     const percent = new Text({
       scene: this,
       x: boxX + boxWidth,
       y: boxY - barOffset,
       text: '0%',
-      fontSize: 56,
+      fontSize,
     }).setOrigin(1, 1);
     const progressBar = this.add.graphics();
     const progressBox = this.add.graphics();
