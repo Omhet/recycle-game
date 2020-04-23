@@ -98,7 +98,7 @@ export default class Main extends Scene {
 
     const moto = new Text({
       scene: this,
-      text: 'No future without it',
+      text: 'no future without it',
       x: width / 2,
       y: height,
       fontSize: 56,
