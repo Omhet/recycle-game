@@ -98,12 +98,12 @@ export default class Boot extends Scene {
     load.image(images.heart, require('../assets/sprites/heart.png'));
     // Sounds
     load.audio(sounds.main, require('../assets/sounds/main.mp3'));
-    load.audio(sounds.puke, require('../assets/sounds/puke.wav'));
-    load.audio(sounds.joy, require('../assets/sounds/joy.wav'));
-    load.audio(sounds.pop, require('../assets/sounds/pop.wav'));
-    load.audio(sounds.whoosh, require('../assets/sounds/whoosh.wav'));
-    load.audio(sounds.stop, require('../assets/sounds/stop.wav'));
-    load.audio(sounds.ding, require('../assets/sounds/ding.wav'));
+    load.audio(sounds.puke, require('../assets/sounds/puke.mp3'));
+    load.audio(sounds.joy, require('../assets/sounds/joy.mp3'));
+    load.audio(sounds.pop, require('../assets/sounds/pop.mp3'));
+    load.audio(sounds.whoosh, require('../assets/sounds/whoosh.mp3'));
+    load.audio(sounds.stop, require('../assets/sounds/stop.mp3'));
+    load.audio(sounds.ding, require('../assets/sounds/ding.mp3'));
   }
 
   create() {
