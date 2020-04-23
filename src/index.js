@@ -38,7 +38,7 @@ const config = {
     ],
   },
   disableContextMenu: true,
-  backgroundColor: '#444',
+  backgroundColor: 'rgb(168, 210, 234)',
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,

@@ -8,6 +8,7 @@ import {
 } from '../constants';
 import { getAnimationName } from '../utils';
 import { Scene } from 'phaser';
+import { Text } from '../gui';
 
 export default class Boot extends Scene {
   constructor() {
@@ -15,6 +16,48 @@ export default class Boot extends Scene {
   }
 
   preload() {
+    const { width, height } = this.game.config;
+    const boxWidth = width / 2;
+    const boxHeight = 80;
+    const boxX = width / 2 - boxWidth / 2;
+    const boxY = height / 2;
+    const barOffset = 20;
+    const loading = new Text({
+      scene: this,
+      x: boxX,
+      y: boxY - barOffset,
+      text: 'Loading...',
+      fontSize: 56,
+    }).setOrigin(0, 1);
+    const percent = new Text({
+      scene: this,
+      x: boxX + boxWidth,
+      y: boxY - barOffset,
+      text: '0%',
+      fontSize: 56,
+    }).setOrigin(1, 1);
+    const progressBar = this.add.graphics();
+    const progressBox = this.add.graphics();
+    progressBox.fillStyle(0xd4ecf7, 0.5);
+    progressBox.fillRoundedRect(boxX, boxY, boxWidth, boxHeight, 16);
+    this.load.on('progress', value => {
+      progressBar.clear();
+      progressBar.fillStyle(0xf3f3ff);
+      progressBar.fillRoundedRect(
+        boxX + barOffset,
+        boxY + barOffset,
+        (boxWidth - barOffset * 2) * value,
+        boxHeight / 2,
+        8
+      );
+      percent.setText(`${parseInt(value * 100)}%`);
+    });
+    this.load.on('complete', () => {
+      progressBar.destroy();
+      progressBox.destroy();
+      loading.destroy();
+    });
+
     const { load } = this;
     // Waste
     load.image(
