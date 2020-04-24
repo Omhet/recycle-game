@@ -55,7 +55,7 @@ export default class Main extends Scene {
     // Controls
     const swipe = this.gestures.add.swipe({
       threshold: 10,
-      velocityThreshold: 100,
+      velocityThreshold: 1000,
       direction: '8dir',
     });
     swipe.on('swipe', this.handleSwipe, this);
@@ -448,14 +448,16 @@ export default class Main extends Scene {
     }
   }
 
-  handleSwipe({ x, y, left, right, up, down }) {
-    const vel = 20;
+  handleSwipe(swipe) {
+    const { x, y, left, right, up, down } = swipe;
+    const vx = Math.min(Math.ceil(swipe.getVelocityX() / 80), 30);
+    const vy = Math.min(Math.ceil(swipe.getVelocityY() / 100), 30);
     this.wastes.forEach(waste => {
       if (isIntersecting(waste, { x, y }, 50)) {
         const detune = Phaser.Math.Between(-300, 300);
         this.sound.play(sounds.whoosh, { detune });
-        let velX = left ? -vel : right ? vel : 0;
-        let velY = up ? -vel : down ? vel : 0;
+        let velX = left ? -vx : right ? vx : 0;
+        let velY = up ? -vy : down ? vy : 0;
         waste.setVelocity(velX, velY);
       }
     });
