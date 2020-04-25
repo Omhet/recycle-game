@@ -402,6 +402,14 @@ export default class Main extends Scene {
   throwLife() {
     if (this.lives < gameOptions.lives) {
       const life = new Life({ scene: this });
+      this.tweens.add({
+        targets: life,
+        duration: 450,
+        ease: 'Sine.easeOut',
+        scale: '+=0.3',
+        yoyo: true,
+        repeat: -1,
+      });
       life.throw();
       this.sound.play(sounds.heartbeat, { detune: 1200 });
       life.once('pointerdown', () => {
