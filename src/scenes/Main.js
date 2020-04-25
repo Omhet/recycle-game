@@ -150,6 +150,8 @@ export default class Main extends Scene {
     this.music.stop();
     this.sound.play(sounds.stop, { volume: 0.2 });
     this.wasteTimer.destroy();
+    this.livesTimer.destroy();
+    this.livesGUI.destroy();
     this.bin.die();
     this.scoreGUI.toggleVisible();
     const gameOverGUI = new GameOver({ scene: this });
