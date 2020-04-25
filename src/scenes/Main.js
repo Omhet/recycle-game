@@ -7,7 +7,7 @@ import {
   sounds,
 } from '../constants';
 import Phaser, { Scene } from 'phaser';
-import { WasteFactory, BinFactory } from '../sprites';
+import { WasteFactory, BinFactory, Life } from '../sprites';
 import {
   isIntersecting,
   LevelManager,
@@ -141,6 +141,7 @@ export default class Main extends Scene {
     this.music.play();
     gameOptions.showStartScreen = false;
     this.startWasteTimer();
+    this.startLivesTimer();
     this.addScore();
     this.livesGUI = new Lives({ scene: this, lives: this.lives });
   }
@@ -381,6 +382,45 @@ export default class Main extends Scene {
     const wasteIndex = this.wastes.findIndex(el => el === waste);
     this.wastes.splice(wasteIndex, 1);
     waste.dispose();
+  }
+
+  startLivesTimer() {
+    if (this.livesTimer) {
+      this.livesTimer.destroy();
+    }
+
+    this.livesTimer = this.time.addEvent({
+      delay: 8000,
+      callback: this.throwLife,
+      callbackScope: this,
+      loop: true,
+    });
+  }
+
+  throwLife() {
+    if (this.lives < gameOptions.lives) {
+      const life = new Life({ scene: this });
+      life.throw();
+      life.once('pointerdown', () => {
+        if (this.lives >= gameOptions.lives) {
+          return;
+        }
+        this.lives++;
+        this.lives = Math.min(this.lives, gameOptions.lives);
+        this.livesGUI.increaseLives();
+        life.destroy();
+      });
+      this.matterCollision.addOnCollideStart({
+        objectA: life,
+        objectB: [
+          this.worldBounds.walls.left,
+          this.worldBounds.walls.right,
+          this.worldBounds.walls.bottom,
+        ],
+        callback: () => life.destroy(),
+        context: this,
+      });
+    }
   }
 
   startWasteTimer() {
