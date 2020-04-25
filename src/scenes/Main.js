@@ -390,7 +390,7 @@ export default class Main extends Scene {
     }
 
     this.livesTimer = this.time.addEvent({
-      delay: 8000,
+      delay: 18000,
       callback: this.throwLife,
       callbackScope: this,
       loop: true,
