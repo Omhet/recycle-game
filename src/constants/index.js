@@ -76,6 +76,7 @@ export const sounds = {
   whoosh: 'whoosh',
   stop: 'stop',
   ding: 'ding',
+  heartbeat: 'heartbeat',
 };
 
 export const gameOptions = {

@@ -403,6 +403,7 @@ export default class Main extends Scene {
     if (this.lives < gameOptions.lives) {
       const life = new Life({ scene: this });
       life.throw();
+      this.sound.play(sounds.heartbeat, { detune: 1200 });
       life.once('pointerdown', () => {
         if (this.lives >= gameOptions.lives) {
           return;
